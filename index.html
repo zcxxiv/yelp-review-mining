@@ -209,274 +209,281 @@ div {
 
 </style> 
 
-<div id="chart2"><br>     可以拖动的点，用鼠标拖住点移动，或者点击/双击，看看会发生什么—–<br><br></div>
+<div id="chart2"><br><br></div>
 
 
-<p><script type="text/javascript"><br>$(document).ready(function() {<br>    // not familiar with the framework, lots of messy code, sorry!</p>
-<pre><code>var margin = { top: 50, right: 0, bottom: 100, left: 100 },
-    width = 960 - margin.left - margin.right,
-    height = 640 - margin.top - margin.bottom;
+<script type="text/javascript"> 
+<!-- $(document).ready(function() { -->
+    // not familiar with the framework, lots of messy code, sorry!
 
-var start = new Date(&apos;December 17, 1995 06:00&apos;);
-var end = new Date(&apos;December 17, 1995 22:30&apos;);
+    var margin = { top: 50, right: 0, bottom: 100, left: 100 },
+        width = 960 - margin.left - margin.right,
+        height = 640 - margin.top - margin.bottom;
 
-d3.csv(&apos;../data/city_distances.csv&apos;, function(error, dcsv) {
+    var start = new Date('December 17, 1995 06:00');
+    var end = new Date('December 17, 1995 22:30');
 
-    var totalDistance = 0;
-    var distances = [0], departs = [], arrivals = [];
+    d3.csv('../data/city_distances.csv', function(error, dcsv) {
 
-    for (var row in dcsv) {
-        var dist = +dcsv[row].miles;
-        totalDistance += dist;
-        distances.push(dist);
-        departs.push(dcsv[row].city1);
-        arrivals.push(dcsv[row].city2);
-    }
+        var totalDistance = 0;
+        var distances = [0], departs = [], arrivals = [];
 
-    var cities = [departs[0]].concat(arrivals);
-
-    for (var i = 0; i &lt; distances.length; i++) {
-        prevDist = (i === 0) ? 0 : distances[i-1];
-        distances[i] = prevDist + distances[i]/totalDistance * height;
-    }
-
-    var yScale = d3.scale.ordinal()
-            .domain(cities)
-            .range(distances);
-
-    var leftAxis = d3.svg.axis()
-            .scale(yScale)
-            .orient(&apos;left&apos;)
-            .innerTickSize(-width + margin.left)
-            .outerTickSize(0)
-            .tickPadding(10);
-
-    var rightAxis = d3.svg.axis()
-            .scale(yScale)
-            .orient(&apos;right&apos;)
-            .innerTickSize(0)
-            .outerTickSize(0)
-            .tickPadding(10);
-
-    var svg = d3.select(&quot;#chart2&quot;).append(&quot;svg&quot;)
-            .attr(&quot;width&quot;, width + margin.left + margin.right)
-            .attr(&quot;height&quot;, height + margin.top + margin.bottom)
-            // .style(&apos;background&apos;, &apos;#F0F0F0&apos;)
-            .append(&quot;g&quot;)
-            .attr(&quot;transform&quot;, &quot;translate(&quot; + margin.left + &quot;,&quot; + margin.top + &quot;)&quot;);
-
-    var left = svg.append(&apos;g&apos;)
-            .call(leftAxis)
-            .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
-            .attr(&apos;fill&apos;, &apos;#AAA&apos;)
-    ;
-
-    left.selectAll(&apos;line&apos;).attr(&apos;stroke&apos;, &apos;#AAA&apos;);
-
-    svg.append(&apos;g&apos;)
-        .call(rightAxis)
-        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
-        .attr(&apos;transform&apos;, &apos;translate(&apos;+ (width - margin.left) + &apos;, &apos; + 0 + &apos;)&apos;)
-        .attr(&apos;fill&apos;, &apos;#AAA&apos;)
-        .selectAll(&apos;line&apos;)
-        .attr(&apos;stroke&apos;, &apos;#AAA&apos;)
-    ;
-
-    var xScale = d3.time.scale()
-            .domain([start, end])
-            .range([0, width-margin.left]);
-
-    var topAxis = d3.svg.axis()
-            .orient(&apos;top&apos;)
-            .scale(xScale)
-            .innerTickSize(-height)
-            .outerTickSize(0)
-            .ticks(d3.time.minutes, 60)
-            .tickFormat(d3.time.format(&apos;%-I%p&apos;))
-            .tickPadding(10);
-
-    var detailedAxis = d3.svg.axis()
-            .orient(&apos;top&apos;)
-            .scale(xScale)
-            .innerTickSize(-height)
-            .outerTickSize(0)
-            .ticks(d3.time.minutes, 15)
-            .tickFormat(d3.time.format(&apos;&apos;))
-            .tickPadding(10);
-
-    var bottomAxis = d3.svg.axis()
-            .orient(&apos;bottom&apos;)
-            .scale(xScale)
-            .innerTickSize(-height)
-            .outerTickSize(0)
-            .ticks(d3.time.minutes, 60)
-            .tickFormat(d3.time.format(&apos;%-I%p&apos;))
-            .tickPadding(10);
-
-    svg.append(&apos;g&apos;)
-        .call(topAxis)
-        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
-        .attr(&apos;transform&apos;, &apos;translate(&apos;+ 0 + &apos;, &apos; + 0 + &apos;)&apos;)
-        .attr(&apos;fill&apos;, &apos;#AAA&apos;)
-        .selectAll(&apos;line&apos;)
-        .attr(&apos;stroke&apos;, &apos;#AAA&apos;)
-    ;
-
-    svg.append(&apos;g&apos;)
-        .call(detailedAxis)
-        .attr(&apos;stroke&apos;, &apos;#DDD&apos;)
-        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
-        .attr(&apos;transform&apos;, &apos;translate(&apos;+ 0 + &apos;, &apos; + 0 + &apos;)&apos;)
-    ;
-
-    svg.append(&apos;g&apos;)
-        .call(bottomAxis)
-        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
-        .attr(&apos;transform&apos;, &apos;translate(&apos;+ 0 + &apos;, &apos; + height + &apos;)&apos;)
-        .attr(&apos;fill&apos;, &apos;#AAA&apos;)
-        .selectAll(&apos;line&apos;)
-        .attr(&apos;stroke&apos;, &apos;#AAA&apos;)
-    ;
-
-    function highlightCities(names) {
-        selectedCities = [];
-        selectedDistances = [];
-        for (var i = 0; i &lt; cities.length; i++) {
-            if (names.includes(cities[i])) {
-                selectedCities.push(cities[i]);
-                selectedDistances.push(distances[i]);
-            }
+        for (var row in dcsv) {
+            var dist = +dcsv[row].miles;
+            totalDistance += dist;
+            distances.push(dist);
+            departs.push(dcsv[row].city1);
+            arrivals.push(dcsv[row].city2);
         }
-        var selectedScale = d3.scale.ordinal()
-                .domain(selectedCities)
-                .range(selectedDistances);
-        var selectedAxis = d3.svg.axis()
-                .scale(selectedScale)
-                .orient(&apos;left&apos;)
+
+        var cities = [departs[0]].concat(arrivals);
+
+        for (var i = 0; i < distances.length; i++) {
+            prevDist = (i === 0) ? 0 : distances[i-1];
+            distances[i] = prevDist + distances[i]/totalDistance * height;
+        }
+
+        var yScale = d3.scale.ordinal()
+                .domain(cities)
+                .range(distances);
+
+        var leftAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient('left')
                 .innerTickSize(-width + margin.left)
                 .outerTickSize(0)
                 .tickPadding(10);
-        svg.append(&apos;g&apos;)
-            .call(selectedAxis)
-            .classed(&apos;selected-stations&apos;, true)
-            .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
-            .attr(&apos;font-weight&apos;, &apos;100&apos;)
-            .attr(&apos;fill&apos;, &apos;red&apos;)
-            .selectAll(&apos;line&apos;)
-            .style({fill: &apos;none&apos;, stroke: &quot;#AAA&quot;})
+
+        var rightAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient('right')
+                .innerTickSize(0)
+                .outerTickSize(0)
+                .tickPadding(10);
+
+        var svg = d3.select("#chart2").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                // .style('background', '#F0F0F0')
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var left = svg.append('g')
+                .call(leftAxis)
+                .attr('font-size', '0.7em')
+                .attr('fill', '#AAA')
         ;
-        left.attr(&apos;opacity&apos;, &apos;0&apos;);
-    }
 
-    var tooltip = d3.select(&apos;.tooltip&apos;)
-            .style(&apos;position&apos;, &apos;absolute&apos;)
-            .style(&apos;padding&apos;, &apos;5px 5px&apos;)
-            .style(&apos;background&apos;, &apos;white&apos;)
-            .style(&apos;opacity&apos;, 0);
+        left.selectAll('line').attr('stroke', '#AAA');
 
-    d3.csv(&apos;../data/hyperloop.csv&apos;, function(error, tcsv) {
+        svg.append('g')
+            .call(rightAxis)
+            .attr('font-size', '0.7em')
+            .attr('transform', 'translate('+ (width - margin.left) + ', ' + 0 + ')')
+            .attr('fill', '#AAA')
+            .selectAll('line')
+            .attr('stroke', '#AAA')
+        ;
 
-        function pad(n){ return n &lt; 10 ? &apos;0&apos;+n : n; }
-        // Processing Data
-        trains = [];
-        for (var row in tcsv) {
-            var t = tcsv[row];
-            var train = {name: &apos;&apos;, path: [], schedule: [], stations: []};
-            for (var prop in t) {
-                if (prop == &apos;train_name&apos;) {
-                    train.name = t[prop];
-                } else {
-                    if (t[prop].length &gt; 0) {
-                        var ttime = new Date(&apos;December 17, 1995 &apos; + t[prop]);
-                        var lastIndex = prop.lastIndexOf(&quot; &quot;);
-                        var station = prop.substring(0, lastIndex);
-                        if (!train.stations.includes(station)) { train.stations.push(station); }
-                        train.schedule.push(&apos;&lt;strong&gt;&apos; + pad(ttime.getHours()) + &apos;:&apos; + pad(ttime.getMinutes()) + &apos;&lt;/strong&gt; &apos; + prop);
-                        train.path.push({x: ttime, y: station});
+        var xScale = d3.time.scale()
+                .domain([start, end])
+                .range([0, width-margin.left]);
+
+        var topAxis = d3.svg.axis()
+                .orient('top')
+                .scale(xScale)
+                .innerTickSize(-height)
+                .outerTickSize(0)
+                .ticks(d3.time.minutes, 60)
+                .tickFormat(d3.time.format('%-I%p'))
+                .tickPadding(10);
+
+        var detailedAxis = d3.svg.axis()
+                .orient('top')
+                .scale(xScale)
+                .innerTickSize(-height)
+                .outerTickSize(0)
+                .ticks(d3.time.minutes, 15)
+                .tickFormat(d3.time.format(''))
+                .tickPadding(10);
+
+        var bottomAxis = d3.svg.axis()
+                .orient('bottom')
+                .scale(xScale)
+                .innerTickSize(-height)
+                .outerTickSize(0)
+                .ticks(d3.time.minutes, 60)
+                .tickFormat(d3.time.format('%-I%p'))
+                .tickPadding(10);
+
+        svg.append('g')
+            .call(topAxis)
+            .attr('font-size', '0.7em')
+            .attr('transform', 'translate('+ 0 + ', ' + 0 + ')')
+            .attr('fill', '#AAA')
+            .selectAll('line')
+            .attr('stroke', '#AAA')
+        ;
+
+        svg.append('g')
+            .call(detailedAxis)
+            .attr('stroke', '#DDD')
+            .attr('font-size', '0.7em')
+            .attr('transform', 'translate('+ 0 + ', ' + 0 + ')')
+        ;
+
+        svg.append('g')
+            .call(bottomAxis)
+            .attr('font-size', '0.7em')
+            .attr('transform', 'translate('+ 0 + ', ' + height + ')')
+            .attr('fill', '#AAA')
+            .selectAll('line')
+            .attr('stroke', '#AAA')
+        ;
+
+        function highlightCities(names) {
+            selectedCities = [];
+            selectedDistances = [];
+            for (var i = 0; i < cities.length; i++) {
+                if (names.includes(cities[i])) {
+                    selectedCities.push(cities[i]);
+                    selectedDistances.push(distances[i]);
+                }
+            }
+            var selectedScale = d3.scale.ordinal()
+                    .domain(selectedCities)
+                    .range(selectedDistances);
+            var selectedAxis = d3.svg.axis()
+                    .scale(selectedScale)
+                    .orient('left')
+                    .innerTickSize(-width + margin.left)
+                    .outerTickSize(0)
+                    .tickPadding(10);
+            svg.append('g')
+                .call(selectedAxis)
+                .classed('selected-stations', true)
+                .attr('font-size', '0.7em')
+                .attr('font-weight', '100')
+                .attr('fill', 'red')
+                .selectAll('line')
+                .style({fill: 'none', stroke: "#AAA"})
+            ;
+            left.attr('opacity', '0');
+        }
+
+        var tooltip = d3.select('.tooltip')
+                .style('position', 'absolute')
+                .style('padding', '5px 5px')
+                .style('background', 'white')
+                .style('opacity', 0);
+
+        d3.csv('../data/hyperloop.csv', function(error, tcsv) {
+
+            function pad(n){ return n < 10 ? '0'+n : n; }
+            // Processing Data
+            trains = [];
+            for (var row in tcsv) {
+                var t = tcsv[row];
+                var train = {name: '', path: [], schedule: [], stations: []};
+                for (var prop in t) {
+                    if (prop == 'train_name') {
+                        train.name = t[prop];
+                    } else {
+                        if (t[prop].length > 0) {
+                            var ttime = new Date('December 17, 1995 ' + t[prop]);
+                            var lastIndex = prop.lastIndexOf(" ");
+                            var station = prop.substring(0, lastIndex);
+                            if (!train.stations.includes(station)) { train.stations.push(station); }
+                            train.schedule.push('<strong>' + pad(ttime.getHours()) + ':' + pad(ttime.getMinutes()) + '</strong> ' + prop);
+                            train.path.push({x: ttime, y: station});
+                        }
                     }
                 }
-            }
-            if (train.path[0].x &gt; train.path[1].x) {
-                var n = train.path.length-1;
-                var path = [train.path[0]];
-                var schedule = [train.schedule[0]];
-                for (var i = 1; i &lt; n; i++) {
-                    path[i] = (i % 2 === 0) ? train.path[i-1] : train.path[i+1];
-                    schedule[i] = (i % 2 === 0) ? train.schedule[i-1] : train.schedule[i+1];
+                if (train.path[0].x > train.path[1].x) {
+                    var n = train.path.length-1;
+                    var path = [train.path[0]];
+                    var schedule = [train.schedule[0]];
+                    for (var i = 1; i < n; i++) {
+                        path[i] = (i % 2 === 0) ? train.path[i-1] : train.path[i+1];
+                        schedule[i] = (i % 2 === 0) ? train.schedule[i-1] : train.schedule[i+1];
+                    }
+                    path[n] = train.path[n];
+                    schedule[n] = train.schedule[n];
+                    train.path = path;
+                    train.schedule = schedule.reverse();
                 }
-                path[n] = train.path[n];
-                schedule[n] = train.schedule[n];
-                train.path = path;
-                train.schedule = schedule.reverse();
+                trains.push(train);
             }
-            trains.push(train);
-        }
 
-        function getSchedule(name) {
-            var output = &apos;&lt;h4&gt; Train: &apos; + name + &apos;&lt;/h4&gt; &lt;p&gt;&apos;;
-            for (var i = 0; i &lt; trains.length; i++) {
-                if (trains[i].name == name) {
-                    var schedule = trains[i].schedule;
-                    for (var j = 0; j &lt; schedule.length; j++) {
-                        output += (j == schedule.length-1) ? schedule[j] : schedule[j] + &apos;&lt;br&gt;&apos;;
+            function getSchedule(name) {
+                var output = '<h4> Train: ' + name + '</h4> <p>';
+                for (var i = 0; i < trains.length; i++) {
+                    if (trains[i].name == name) {
+                        var schedule = trains[i].schedule;
+                        for (var j = 0; j < schedule.length; j++) {
+                            output += (j == schedule.length-1) ? schedule[j] : schedule[j] + '<br>';
+                        }
                     }
                 }
+                return output + '</p>';
             }
-            return output + &apos;&lt;/p&gt;&apos;;
-        }
 
-        function getStations(name) {
-            for (var i = 0; i &lt; trains.length; i++) {
-                if (trains[i].name == name) {
-                    return trains[i].stations;
+            function getStations(name) {
+                for (var i = 0; i < trains.length; i++) {
+                    if (trains[i].name == name) {
+                        return trains[i].stations;
+                    }
                 }
+                return [];
             }
-            return [];
-        }
 
-        // Draw paths
-        var line = d3.svg.line()
-                .x(function(d) { return xScale(d.x); })
-                .y(function(d) { return yScale(d.y); });
+            // Draw paths
+            var line = d3.svg.line()
+                    .x(function(d) { return xScale(d.x); })
+                    .y(function(d) { return yScale(d.y); });
 
-        svg.selectAll(&apos;g.p&apos;)
-            .data(trains)
-            .enter().append(&apos;g&apos;)
-            .classed(&apos;p&apos;, true)
-            .attr(&apos;id&apos;, function(d) { return d.name; })
-            .selectAll(&apos;path&apos;)
-            .data(function(d, i) {
-                return [d.path];
-            })
-            .enter().append(&apos;path&apos;)
-            .attr(&apos;d&apos;, line)
-            .classed(&apos;path&apos;, true)
-            .on(&apos;mouseover&apos;, function(d) {
-                d3.selectAll(&apos;.path&apos;)
-                    .attr(&apos;opacity&apos;, &apos;0&apos;);
-                d3.select(this)
-                    .classed(&apos;selected-path&apos;, true);
-                tooltip.transition().style(&apos;opacity&apos;, 0.7);
-                var train_name = this.parentNode.id;
-                highlightCities(getStations(train_name));
-                tooltip.html(getSchedule( train_name ))
-                    .style(&apos;left&apos;, (d3.event.pageX) + &apos;px&apos;)
-                    .style(&apos;top&apos;, (d3.event.pageY) + &apos;px&apos;);
-            })
-            .on (&apos;mouseout&apos;, function(d) {
-                d3.selectAll(&apos;.path&apos;).attr(&apos;opacity&apos;, &apos;1&apos;);
-                d3.select(this).classed(&apos;selected-path&apos;, false);
-                d3.select(&apos;.selected-stations&apos;).remove();
-                left.attr(&apos;opacity&apos;, &apos;1.0&apos;);
-                tooltip.transition().delay(200).style(&apos;opacity&apos;, 0);
-            })
-        ;
+            svg.selectAll('g.p')
+                .data(trains)
+                .enter().append('g')
+                .classed('p', true)
+                .attr('id', function(d) { return d.name; })
+                .selectAll('path')
+                .data(function(d, i) {
+                    return [d.path];
+                })
+                .enter().append('path')
+                .attr('d', line)
+                .classed('path', true)
+                .on('mouseover', function(d) {
+                    d3.selectAll('.path')
+                        .attr('opacity', '0');
+                    d3.select(this)
+                        .classed('selected-path', true);
+                    tooltip.transition().style('opacity', 0.7);
+                    var train_name = this.parentNode.id;
+                    highlightCities(getStations(train_name));
+                    tooltip.html(getSchedule( train_name ))
+                        .style('left', (d3.event.pageX) + 'px')
+                        .style('top', (d3.event.pageY) + 'px');
+                })
+                .on ('mouseout', function(d) {
+                    d3.selectAll('.path').attr('opacity', '1');
+                    d3.select(this).classed('selected-path', false);
+                    d3.select('.selected-stations').remove();
+                    left.attr('opacity', '1.0');
+                    tooltip.transition().delay(200).style('opacity', 0);
+                })
+            ;
+
+        });
 
     });
-
 });
-</code></pre><p>});<br></style></p>
-</script></p>
+</script>
+
+
+
+
       
     </div>
     <footer class="article-footer">
