@@ -256,9 +256,7 @@
 <li>Lowercase, delete all the stopwords and punctuation as well as all reviews in other language.</li>
 <li>Take all the reviews scores 5 and 1, find the top 500 words that are most frequently shown in the reviews, named as wordlist1 (top 500 words in 1-star review)and wordlist5 (top 500 words in 5-star review)</li>
 <li>Compare the two lists, delete any words that exist in both list</li>
-<li></li><li>The words left in the wordlist5 are what we want.</li>
-
-
+<li>The words left in the wordlist5 are what we want.</li>
 </ol>
 <p>package from Jason Davies. The tooltip shows the ranking of the word.</p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> <!-- JQUERY -->
@@ -656,7 +654,7 @@ function cloud(d3) {
 })();
 
 $(document).ready(function() {
-    var width = window.innerWidth / 2,
+    var width = 700,
         height = 480;
 
     var fill = d3.scale.category20();
