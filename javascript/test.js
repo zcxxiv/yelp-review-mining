@@ -11,7 +11,7 @@ $(document).ready(function() {
             .style('background', 'white')
             .style('opacity', 0);
 
-    d3.csv('/data/positive_words.csv')
+    d3.csv('../data/positive_words.csv')
         .row(function(d) {
             return { key: d.word, value: +d.count };
         })
