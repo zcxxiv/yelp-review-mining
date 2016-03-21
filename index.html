@@ -88,153 +88,395 @@
       
         <p>This is a test post??</p>
 <!-- ![meat](/images/meat.jpg) -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> <\!-- JQUERY -\-> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> <!-- JQUERY -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script> <\!-- D3.js -\-> -->
 <script src="http://d3js.org/d3.v3.min.js"></script> 
 
 <style> 
 
-.link {  
-stroke: #666;
-opacity: 0.6;
-stroke-width: 1.5px; 
-} 
+body {
+    font-size: 14px;
+}
 
-.node circle { 
-stroke: #fff; 
-opacity: 0.6;
-stroke-width: 1.5px; 
-} 
+rect.bordered {
+    stroke: #E6E6E6;
+    stroke-width:2px;
+}
 
-text { 
-font: 10px serif; 
-pointer-events: none; 
-} 
+text.mono {
+    font-size: 9pt;
+    font-family: Consolas, courier;
+    fill: #aaa;
+}
+
+text.axis-workweek {
+    fill: #000;
+}
+
+text.axis-worktime {
+    fill: #000;
+}
+
+.tooltip {
+    pointer-events: none;
+}
+
+#Alex .path {
+    fill: none;
+    stroke: #bb1515;
+}
+
+#Vinh .path {
+    fill: none;
+    stroke: #e0cda7;
+}
+
+#Christie .path {
+    fill: none;
+    stroke: #634ebf;
+}
+
+#John .path {
+    fill: none;
+    stroke: #e57a4c;
+}
+
+#Jordan .path {
+    fill: none;
+    stroke: #00afb4;
+}
+
+#Andy .path {
+    fill: none;
+    stroke: #086c74;
+}
+
+#Libby .path {
+    fill: none;
+    stroke: #f6c360;
+}
+
+#Sam .path {
+    fill: none;
+    stroke: #683f85;
+}
+
+#Gabe .path {
+    fill: none;
+    stroke: #8ecc06;
+}
+
+#Julia .path {
+    fill: none;
+    stroke: #596517;
+}
+
+#Angelo .path {
+    fill: none;
+    stroke: #afd8fb;
+}
+
+#Karthik .path {
+    fill: none;
+    stroke: #418ccb;
+}
+
+#Foster .path {
+    fill: none;
+    stroke: #ff8181;
+}
+
+#Ishan .path {
+    fill: none;
+    stroke: #f2ad9f;
+}
+
+.path {
+    fill: none;
+    stroke: black;
+    stroke-width: 2px;
+}
+
+.selected-path {
+    fill: none;
+    opacity: 1;
+    stroke-width: 4px;
+}
+
+div {
+    font-family: Courier New;
+}
 
 </style> 
 
-<div id="body2"><br>     可以拖动的点，用鼠标拖住点移动，或者点击/双击，看看会发生什么—–<br><br></div>
+<div id="chart2"><br>     可以拖动的点，用鼠标拖住点移动，或者点击/双击，看看会发生什么—–<br><br></div>
 
 
-<script type="text/javascript"> 
-var links = [ { "source" : "A", "target" : "B" }, { "source" : "A", "target" : "C" }, { "source" : "A", "target" : "D" }, { "source" : "A", "target" : "J" }, { "source" : "B", "target" : "E" }, { "source" : "B", "target" : "F" }, { "source" : "C", "target" : "G" }, { "source" : "C", "target" : "H" }, { "source" : "D", "target" : "I" } ] ; 
- var width = 700 
- height = 300 ; 
+<p><script type="text/javascript"><br>$(document).ready(function() {<br>    // not familiar with the framework, lots of messy code, sorry!</p>
+<pre><code>var margin = { top: 50, right: 0, bottom: 100, left: 100 },
+    width = 960 - margin.left - margin.right,
+    height = 640 - margin.top - margin.bottom;
 
-var nodes = {}
+var start = new Date(&apos;December 17, 1995 06:00&apos;);
+var end = new Date(&apos;December 17, 1995 22:30&apos;);
 
-// Compute the distinct nodes from the links.
-links.forEach(function(link) {
-link.source = nodes[link.source] || 
-(nodes[link.source] = {name: link.source});
-link.target = nodes[link.target] || 
-(nodes[link.target] = {name: link.target});
-link.value = +link.value;
+d3.csv(&apos;../data/city_distances.csv&apos;, function(error, dcsv) {
+
+    var totalDistance = 0;
+    var distances = [0], departs = [], arrivals = [];
+
+    for (var row in dcsv) {
+        var dist = +dcsv[row].miles;
+        totalDistance += dist;
+        distances.push(dist);
+        departs.push(dcsv[row].city1);
+        arrivals.push(dcsv[row].city2);
+    }
+
+    var cities = [departs[0]].concat(arrivals);
+
+    for (var i = 0; i &lt; distances.length; i++) {
+        prevDist = (i === 0) ? 0 : distances[i-1];
+        distances[i] = prevDist + distances[i]/totalDistance * height;
+    }
+
+    var yScale = d3.scale.ordinal()
+            .domain(cities)
+            .range(distances);
+
+    var leftAxis = d3.svg.axis()
+            .scale(yScale)
+            .orient(&apos;left&apos;)
+            .innerTickSize(-width + margin.left)
+            .outerTickSize(0)
+            .tickPadding(10);
+
+    var rightAxis = d3.svg.axis()
+            .scale(yScale)
+            .orient(&apos;right&apos;)
+            .innerTickSize(0)
+            .outerTickSize(0)
+            .tickPadding(10);
+
+    var svg = d3.select(&quot;#chart2&quot;).append(&quot;svg&quot;)
+            .attr(&quot;width&quot;, width + margin.left + margin.right)
+            .attr(&quot;height&quot;, height + margin.top + margin.bottom)
+            // .style(&apos;background&apos;, &apos;#F0F0F0&apos;)
+            .append(&quot;g&quot;)
+            .attr(&quot;transform&quot;, &quot;translate(&quot; + margin.left + &quot;,&quot; + margin.top + &quot;)&quot;);
+
+    var left = svg.append(&apos;g&apos;)
+            .call(leftAxis)
+            .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
+            .attr(&apos;fill&apos;, &apos;#AAA&apos;)
+    ;
+
+    left.selectAll(&apos;line&apos;).attr(&apos;stroke&apos;, &apos;#AAA&apos;);
+
+    svg.append(&apos;g&apos;)
+        .call(rightAxis)
+        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
+        .attr(&apos;transform&apos;, &apos;translate(&apos;+ (width - margin.left) + &apos;, &apos; + 0 + &apos;)&apos;)
+        .attr(&apos;fill&apos;, &apos;#AAA&apos;)
+        .selectAll(&apos;line&apos;)
+        .attr(&apos;stroke&apos;, &apos;#AAA&apos;)
+    ;
+
+    var xScale = d3.time.scale()
+            .domain([start, end])
+            .range([0, width-margin.left]);
+
+    var topAxis = d3.svg.axis()
+            .orient(&apos;top&apos;)
+            .scale(xScale)
+            .innerTickSize(-height)
+            .outerTickSize(0)
+            .ticks(d3.time.minutes, 60)
+            .tickFormat(d3.time.format(&apos;%-I%p&apos;))
+            .tickPadding(10);
+
+    var detailedAxis = d3.svg.axis()
+            .orient(&apos;top&apos;)
+            .scale(xScale)
+            .innerTickSize(-height)
+            .outerTickSize(0)
+            .ticks(d3.time.minutes, 15)
+            .tickFormat(d3.time.format(&apos;&apos;))
+            .tickPadding(10);
+
+    var bottomAxis = d3.svg.axis()
+            .orient(&apos;bottom&apos;)
+            .scale(xScale)
+            .innerTickSize(-height)
+            .outerTickSize(0)
+            .ticks(d3.time.minutes, 60)
+            .tickFormat(d3.time.format(&apos;%-I%p&apos;))
+            .tickPadding(10);
+
+    svg.append(&apos;g&apos;)
+        .call(topAxis)
+        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
+        .attr(&apos;transform&apos;, &apos;translate(&apos;+ 0 + &apos;, &apos; + 0 + &apos;)&apos;)
+        .attr(&apos;fill&apos;, &apos;#AAA&apos;)
+        .selectAll(&apos;line&apos;)
+        .attr(&apos;stroke&apos;, &apos;#AAA&apos;)
+    ;
+
+    svg.append(&apos;g&apos;)
+        .call(detailedAxis)
+        .attr(&apos;stroke&apos;, &apos;#DDD&apos;)
+        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
+        .attr(&apos;transform&apos;, &apos;translate(&apos;+ 0 + &apos;, &apos; + 0 + &apos;)&apos;)
+    ;
+
+    svg.append(&apos;g&apos;)
+        .call(bottomAxis)
+        .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
+        .attr(&apos;transform&apos;, &apos;translate(&apos;+ 0 + &apos;, &apos; + height + &apos;)&apos;)
+        .attr(&apos;fill&apos;, &apos;#AAA&apos;)
+        .selectAll(&apos;line&apos;)
+        .attr(&apos;stroke&apos;, &apos;#AAA&apos;)
+    ;
+
+    function highlightCities(names) {
+        selectedCities = [];
+        selectedDistances = [];
+        for (var i = 0; i &lt; cities.length; i++) {
+            if (names.includes(cities[i])) {
+                selectedCities.push(cities[i]);
+                selectedDistances.push(distances[i]);
+            }
+        }
+        var selectedScale = d3.scale.ordinal()
+                .domain(selectedCities)
+                .range(selectedDistances);
+        var selectedAxis = d3.svg.axis()
+                .scale(selectedScale)
+                .orient(&apos;left&apos;)
+                .innerTickSize(-width + margin.left)
+                .outerTickSize(0)
+                .tickPadding(10);
+        svg.append(&apos;g&apos;)
+            .call(selectedAxis)
+            .classed(&apos;selected-stations&apos;, true)
+            .attr(&apos;font-size&apos;, &apos;0.7em&apos;)
+            .attr(&apos;font-weight&apos;, &apos;100&apos;)
+            .attr(&apos;fill&apos;, &apos;red&apos;)
+            .selectAll(&apos;line&apos;)
+            .style({fill: &apos;none&apos;, stroke: &quot;#AAA&quot;})
+        ;
+        left.attr(&apos;opacity&apos;, &apos;0&apos;);
+    }
+
+    var tooltip = d3.select(&apos;.tooltip&apos;)
+            .style(&apos;position&apos;, &apos;absolute&apos;)
+            .style(&apos;padding&apos;, &apos;5px 5px&apos;)
+            .style(&apos;background&apos;, &apos;white&apos;)
+            .style(&apos;opacity&apos;, 0);
+
+    d3.csv(&apos;../data/hyperloop.csv&apos;, function(error, tcsv) {
+
+        function pad(n){ return n &lt; 10 ? &apos;0&apos;+n : n; }
+        // Processing Data
+        trains = [];
+        for (var row in tcsv) {
+            var t = tcsv[row];
+            var train = {name: &apos;&apos;, path: [], schedule: [], stations: []};
+            for (var prop in t) {
+                if (prop == &apos;train_name&apos;) {
+                    train.name = t[prop];
+                } else {
+                    if (t[prop].length &gt; 0) {
+                        var ttime = new Date(&apos;December 17, 1995 &apos; + t[prop]);
+                        var lastIndex = prop.lastIndexOf(&quot; &quot;);
+                        var station = prop.substring(0, lastIndex);
+                        if (!train.stations.includes(station)) { train.stations.push(station); }
+                        train.schedule.push(&apos;&lt;strong&gt;&apos; + pad(ttime.getHours()) + &apos;:&apos; + pad(ttime.getMinutes()) + &apos;&lt;/strong&gt; &apos; + prop);
+                        train.path.push({x: ttime, y: station});
+                    }
+                }
+            }
+            if (train.path[0].x &gt; train.path[1].x) {
+                var n = train.path.length-1;
+                var path = [train.path[0]];
+                var schedule = [train.schedule[0]];
+                for (var i = 1; i &lt; n; i++) {
+                    path[i] = (i % 2 === 0) ? train.path[i-1] : train.path[i+1];
+                    schedule[i] = (i % 2 === 0) ? train.schedule[i-1] : train.schedule[i+1];
+                }
+                path[n] = train.path[n];
+                schedule[n] = train.schedule[n];
+                train.path = path;
+                train.schedule = schedule.reverse();
+            }
+            trains.push(train);
+        }
+
+        function getSchedule(name) {
+            var output = &apos;&lt;h4&gt; Train: &apos; + name + &apos;&lt;/h4&gt; &lt;p&gt;&apos;;
+            for (var i = 0; i &lt; trains.length; i++) {
+                if (trains[i].name == name) {
+                    var schedule = trains[i].schedule;
+                    for (var j = 0; j &lt; schedule.length; j++) {
+                        output += (j == schedule.length-1) ? schedule[j] : schedule[j] + &apos;&lt;br&gt;&apos;;
+                    }
+                }
+            }
+            return output + &apos;&lt;/p&gt;&apos;;
+        }
+
+        function getStations(name) {
+            for (var i = 0; i &lt; trains.length; i++) {
+                if (trains[i].name == name) {
+                    return trains[i].stations;
+                }
+            }
+            return [];
+        }
+
+        // Draw paths
+        var line = d3.svg.line()
+                .x(function(d) { return xScale(d.x); })
+                .y(function(d) { return yScale(d.y); });
+
+        svg.selectAll(&apos;g.p&apos;)
+            .data(trains)
+            .enter().append(&apos;g&apos;)
+            .classed(&apos;p&apos;, true)
+            .attr(&apos;id&apos;, function(d) { return d.name; })
+            .selectAll(&apos;path&apos;)
+            .data(function(d, i) {
+                return [d.path];
+            })
+            .enter().append(&apos;path&apos;)
+            .attr(&apos;d&apos;, line)
+            .classed(&apos;path&apos;, true)
+            .on(&apos;mouseover&apos;, function(d) {
+                d3.selectAll(&apos;.path&apos;)
+                    .attr(&apos;opacity&apos;, &apos;0&apos;);
+                d3.select(this)
+                    .classed(&apos;selected-path&apos;, true);
+                tooltip.transition().style(&apos;opacity&apos;, 0.7);
+                var train_name = this.parentNode.id;
+                highlightCities(getStations(train_name));
+                tooltip.html(getSchedule( train_name ))
+                    .style(&apos;left&apos;, (d3.event.pageX) + &apos;px&apos;)
+                    .style(&apos;top&apos;, (d3.event.pageY) + &apos;px&apos;);
+            })
+            .on (&apos;mouseout&apos;, function(d) {
+                d3.selectAll(&apos;.path&apos;).attr(&apos;opacity&apos;, &apos;1&apos;);
+                d3.select(this).classed(&apos;selected-path&apos;, false);
+                d3.select(&apos;.selected-stations&apos;).remove();
+                left.attr(&apos;opacity&apos;, &apos;1.0&apos;);
+                tooltip.transition().delay(200).style(&apos;opacity&apos;, 0);
+            })
+        ;
+
+    });
+
 });
-
-var color = d3.scale.category20();
-
-var force = d3.layout.force() 
-.nodes(d3.values(nodes)) 
-.links(links) 
-.size([width, height]) 
-.linkDistance(80) 
-.charge(-400) 
-.on("tick", tick) 
-.start(); 
-
-var svg = d3.select("#body2").append("svg") 
-.attr("width", width) 
-.attr("height", height); 
-
-var link = svg.selectAll(".link") 
-.data(force.links()) 
-.enter().append("line") 
-.attr("class", "link"); 
-
-var node = svg.selectAll(".node") 
-.data(force.nodes()) 
-.enter().append("g") 
-.attr("class", "node") 
-.on("mouseover", mouseover) 
-.on("mouseout", mouseout) 
-.on("click", click)
-.on("dblclick", dblclick)
-.call(force.drag); 
-
-node.append("circle") 
-.attr("r", 8)
-.style("fill", function(d) { return color(d.value); });
-
-node.append("text") 
-.attr("x", 12) 
-.attr("dy", ".35em") 
-.style("fill", "steelblue")
-.text(function(d) { return d.name; }); 
-
-function tick() { 
-link 
-.attr("x1", function(d) { return d.source.x; }) 
-.attr("y1", function(d) { return d.source.y; }) 
-.attr("x2", function(d) { return d.target.x; }) 
-.attr("y2", function(d) { return d.target.y; }); 
-
-node 
-.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; }); 
-} 
-
-function mouseover() { 
-d3.select(this).select("circle").transition() 
-.duration(750) 
-.attr("r", 16); 
-} 
-
-function mouseout() { 
-d3.select(this).select("circle").transition() 
-.duration(750) 
-.attr("r", 8); 
-} 
-// action to take on mouse click
-function click() {
-d3.select(this).select("text").transition()
-.duration(750)
-.attr("x", 22)
-.style("stroke-width", ".5px")
-.style("fill", "#E34A33")
-.style("font", "20px serif");
-d3.select(this).select("circle").transition()
-.duration(750)
-.style("fill", "#E34A33")
-.attr("r", 16)
-}
-
-// action to take on mouse double click
-function dblclick() {
-d3.select(this).select("circle").transition()
-.duration(750)
-.attr("r", 6)
-.style("fill", "#E34A33");
-d3.select(this).select("text").transition()
-.duration(750)
-.attr("x", 12)
-.style("stroke", "none")
-.style("fill", "#E34A33")
-.style("stroke", "none")
-.style("font", "10px serif");
-}
-</script>
-
-<style type="text/css">
- circle {
-  fill: #000;
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-</style>
-
-
-
-
+</code></pre><p>});<br></style></p>
+</script></p>
       
     </div>
     <footer class="article-footer">
