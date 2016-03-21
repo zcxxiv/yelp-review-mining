@@ -57,28 +57,22 @@
 
 
 
-<meta name="description" content="// Word cloud layout by Jason Davies, http://www.jasondavies.com/word-cloud/
-// Algorithm due to Jonathan Feinberg, http://static.mrfeinberg.com/bv_ch03.pdf
-(function() {
+<meta name="description" content="Visualization
 
-if (typeof define =">
+Our final project uses datasets from Yelp and wants to create a sentiment list specifically for Yelp reviews (something similar to AFINN-111, but fits Yelp better). Visualization above">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Midterm Report">
 <meta property="og:url" content="http://yoursite.com/2016/03/21/Test-Post/index.html">
 <meta property="og:site_name" content="Yelp Review Mining">
-<meta property="og:description" content="// Word cloud layout by Jason Davies, http://www.jasondavies.com/word-cloud/
-// Algorithm due to Jonathan Feinberg, http://static.mrfeinberg.com/bv_ch03.pdf
-(function() {
+<meta property="og:description" content="Visualization
 
-if (typeof define =">
-<meta property="og:updated_time" content="2016-03-21T20:19:30.000Z">
+Our final project uses datasets from Yelp and wants to create a sentiment list specifically for Yelp reviews (something similar to AFINN-111, but fits Yelp better). Visualization above">
+<meta property="og:updated_time" content="2016-03-21T20:22:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Midterm Report">
-<meta name="twitter:description" content="// Word cloud layout by Jason Davies, http://www.jasondavies.com/word-cloud/
-// Algorithm due to Jonathan Feinberg, http://static.mrfeinberg.com/bv_ch03.pdf
-(function() {
+<meta name="twitter:description" content="Visualization
 
-if (typeof define =">
+Our final project uses datasets from Yelp and wants to create a sentiment list specifically for Yelp reviews (something similar to AFINN-111, but fits Yelp better). Visualization above">
 
 
 
@@ -255,8 +249,18 @@ if (typeof define =">
       
 
       
-        <div id="wc"></div>
+        <h2 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h2><div id="wc"></div>
 
+<p>Our final project uses datasets from Yelp and wants to create a sentiment list specifically for Yelp reviews (something similar to AFINN-111, but fits Yelp better). Visualization above is a word cloud which shows the top 163 words (positive words) which show up in 5-star (most positive) reviews the most frequently. The bigger the word is, the more frequently it shows up in 5-star review, and it tends to be more positive.<br>We perform the steps below to get rid of neutral words which shows up a lot but don’t have a positive or negative meaning with it, such as “food”, “service”:</p>
+<ol>
+<li>Lowercase, delete all the stopwords and punctuation as well as all reviews in other language.</li>
+<li>Take all the reviews scores 5 and 1, find the top 500 words that are most frequently shown in the reviews, named as wordlist1 (top 500 words in 1-star review)and wordlist5 (top 500 words in 5-star review)</li>
+<li>Compare the two lists, delete any words that exist in both list</li>
+<li></li><li>The words left in the wordlist5 are what we want.</li>
+
+
+</ol>
+<p>package from Jason Davies. The tooltip shows the ranking of the word.</p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> <!-- JQUERY -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <!-- <script src="/javascript/d3.layout.cloud.js"></script> -->
@@ -848,7 +852,7 @@ $(document).ready(function() {
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Visualization"><span class="nav-number">1.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
