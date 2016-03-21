@@ -223,7 +223,7 @@ $(document).ready(function() {
     var start = new Date('December 17, 1995 06:00');
     var end = new Date('December 17, 1995 22:30');
 
-    d3.csv('../data/city_distances.csv', function(error, dcsv) {
+    d3.csv('/data/city_distances.csv', function(error, dcsv) {
 
         var totalDistance = 0;
         var distances = [0], departs = [], arrivals = [];
