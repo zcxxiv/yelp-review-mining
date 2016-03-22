@@ -258,16 +258,29 @@ Environment: Score from 1 to 5
 </code></pre><p>And the report is aimed to help restaurants to improve their weakness and to help users have a better idea about how the restaurants are.</p>
 <h1 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h1><p>A basic study of the business dataset reveals that the reviews we received for businesses on yelp are not evenly distributed among different states in the US.  In fact, our dataset contains most reviews for businesses in Nevada and Arizona.</p>
 <p><img src="/images/map1.png" alt=""></p>
+<p>We also plot the distribution for the stars of businesses and find that most stores have average stars above 3:</p>
+<p><img src="/images/barchart1.png" alt=""></p>
+<p>Next, we focus on extracting useful information from the review dataset. It contains mostly 4-star and 5-star reviews.</p>
+<p><img src="/images/barchart2.png" alt=""></p>
+<p>We look at all the 5-star (most positive) reviews as well as all the 1-star (most negative) review. We want to check the hypothesis below:<br>Positive words (words which should assign higher sentiment value) will appear in the 5-star reviews very often while not in the 1-star reviews. =&gt; Words appears very frequently in the 5-star reviews but rarely shows up from the 1-star reviews are the positive words.</p>
+<ol>
+<li><p>Negative words (words which should assign lower sentiment value) will appear in the 1-star reviews very often while not in the 5-star reviews. =&gt; Words appears very frequently in the 1-star reviews but rarely shows up from the 5-star reviews are the negative words.</p>
+</li>
+<li><p>Below are two word clouds, which show the most positive words as well the most negative words we find from the review based on our hypothesis. The bigger the word is, the more frequently it shows up in 5-star/1-star reviews. The rank of the word will show up if you place your mouse on the word.</p>
+</li>
+</ol>
 <div id="wc"></div>
 
-<p>Our final project uses datasets from Yelp and wants to create a sentiment list specifically for Yelp reviews (something similar to AFINN-111, but fits Yelp better). Visualization above is a word cloud which shows the top 163 words (positive words) which show up in 5-star (most positive) reviews the most frequently. The bigger the word is, the more frequently it shows up in 5-star review, and it tends to be more positive.<br>We perform the steps below to get rid of neutral words which shows up a lot but don’t have a positive or negative meaning with it, such as “food”, “service”:</p>
-<ol>
-<li>Lowercase, delete all the stopwords and punctuation as well as all reviews in other language.</li>
-<li>Take all the reviews scores 5 and 1, find the top 500 words that are most frequently shown in the reviews, named as wordlist1 (top 500 words in 1-star review)and wordlist5 (top 500 words in 5-star review)</li>
-<li>Compare the two lists, delete any words that exist in both list</li>
-<li>The words left in the wordlist5 are what we want.</li>
-</ol>
-<p>package from Jason Davies. The tooltip shows the ranking of the word.</p>
+
+<p>We perform the following steps to get the cleaned data:<br>Lowercase, delete all the stop words and punctuation and all reviews in other language.<br>Take all the reviews with scores 5 and 1, find the top 500 words that are most frequently shown in the reviews, named as wordlist1 (top 500 words in 1-star review) and wordlist5 (top 500 words in 5-star review)<br>Compare the two lists, delete any words that exist in both list<br>The words left in the wordlist5 are the positive words and the words left in wordlist1 are the negative words.</p>
+<p>Based on the two word clouds above, our hypothesis on the positive words are supported: most of the “positive words” we find, especially the top 50 words, have a positive meaning with it, such as “awesome”, “fresh”, “excellent”, “favorite”, happy”, etc. However, our hypothesis of the negative words are not supported at all: most of the “negative words” we find, according to our hypothesis, don’t have any negative meaning behind it. Among the top 50 “negative words” we find, only two of them have noticeable negative meaning behind it (“bad” and “rude”).</p>
+<p>A natural follow-up is to look at the most-frequent two-word and three-word phrases.</p>
+<h1 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h1><p>For the machine learning part of our project, this time, we want to find the relationship between the restaurant’s actual star and the [city, state, price range, current_state] set. In order to make our result more reliable, we need to do some operations to the data we have. </p>
+<p>First, we noticed that there is an attribute in the dataset called [review_count] and we counted number of all the reviews and average them to get a average review_count in the dataset to be 31.6. Then, what we do is to ingore all the data with a review_count less than the average number we just get. We took this step as small review_count will definitely cause a big bias on the rating as well as the star of the restaurant. Then, regarding to a restaurant, price_range is also extremely important. However, not all data in our dataset have a price_range attribute. Thus, what we mainly do is to just pick the data with the price_range tag to do the learning. In addition, the current status of the restaurant will also affect the star of the restaurant badly in common sense. In all, with all the parameters above plus [city, state] pair. We generated our training features.</p>
+<p>Next, we need to move to the training label part. For training labels, we count the average star of all restaurants that have above average reviews and price range tag, again, in order to avoid bias of the data. Then, we give label 1 to stars more or equal to average star and 0 to stars less than averae star. In this way, we obtained all training labels and we start doing machine learining.</p>
+<p>We used nb, log, svm models to model the data and did the 10-folder cross validation. The result turned out to be in the interval of [0.55, 0.60] and when print 10 most and 10 least informative features, the results all turned out to be city name. </p>
+<p>Analysis: If our accuracy of the 10-folder is high and the most/least informative features are all cities, we can conclude that the city where the restaurant locationed in really matters. However, in our case, the accuray is not high, thus, we cannot draw the conclusion that the city matters. On the other side, our accuracy is not always oscillation below and above 0.5, which means the feature set can actually give us some cule about the star of the restaurant. This is awesome as we can further explore the dataset to obtain a better result. Maybe we can combaine this machine learning method with other methods later to realize our final goal.</p>
+<p>Conclusion: As for this machine learning method, we cannot rely on [city, state, price_range, current_state] to predict the star of the restaurant very correctly.</p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> <!-- JQUERY -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <!-- <script src="/javascript/d3.layout.cloud.js"></script> -->
