@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -50,7 +50,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/yelp.png?v=0.5.0" />
 
 
 
@@ -72,7 +72,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Muse',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -249,7 +249,8 @@
       
         
           
-            <h2 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h2><!-- <div id="wc"></div> -->
+            <h2 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h2><div id="wc"></div>
+
 <p>Our final project uses datasets from Yelp and wants to create a sentiment list specifically for Yelp reviews (something similar to AFINN-111, but fits Yelp better). Visualization above is a word cloud which shows the top 163 words (positive words) which show up in 5-star (most positive) reviews the most frequently. The bigger the word is, the more frequently it shows up in 5-star review, and it tends to be more positive.<br>We perform the steps below to get rid of neutral words which shows up a lot but don’t have a positive or negative meaning with it, such as “food”, “service”:</p>
 <ol>
 <li>Lowercase, delete all the stopwords and punctuation as well as all reviews in other language.</li>
@@ -939,7 +940,7 @@ $(document).ready(function() {
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Pisces
   </a>
 </div>
 
@@ -992,6 +993,13 @@ $(document).ready(function() {
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
 
   
 
