@@ -257,11 +257,11 @@ Location: Score from 1 to 5
 Environment: Score from 1 to 5
 </code></pre><p>And the report is aimed to help restaurants to improve their weakness and to help users have a better idea about how the restaurants are.</p>
 <h1 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h1><p>A basic study of the business dataset reveals that the reviews we received for businesses on yelp are not evenly distributed among different states in the US.  In fact, our dataset contains most reviews for businesses in Nevada and Arizona.</p>
-<p><img src="/images/map1.png" alt=""></p>
+<img src="/images/map1.png" title="review count for each state">
 <p>We also plot the distribution for the stars of businesses and find that most stores have average stars above 3:</p>
-<p><img src="/images/barchart1.png" alt=""></p>
+<img src="/images/barchart1.png" title="business average rating">
 <p>Next, we focus on extracting useful information from the review dataset. It contains mostly 4-star and 5-star reviews.</p>
-<p><img src="/images/barchart2.png" alt=""></p>
+<img src="/images/barchart2.png" title="rating distribution">
 <p>We look at all the 5-star (most positive) reviews as well as all the 1-star (most negative) review. We want to check the hypothesis below:<br>Positive words (words which should assign higher sentiment value) will appear in the 5-star reviews very often while not in the 1-star reviews. =&gt; Words appears very frequently in the 5-star reviews but rarely shows up from the 1-star reviews are the positive words.</p>
 <ol>
 <li><p>Negative words (words which should assign lower sentiment value) will appear in the 1-star reviews very often while not in the 5-star reviews. =&gt; Words appears very frequently in the 1-star reviews but rarely shows up from the 5-star reviews are the negative words.</p>
@@ -269,7 +269,11 @@ Environment: Score from 1 to 5
 <li><p>Below are two word clouds, which show the most positive words as well the most negative words we find from the review based on our hypothesis. The bigger the word is, the more frequently it shows up in 5-star/1-star reviews. The rank of the word will show up if you place your mouse on the word.</p>
 </li>
 </ol>
-<div id="wc"></div>
+<p><div id="wc1"></div></p>
+<p align="center" style="color:#aaa"><strong>positive word cloud</strong></p>
+
+<p><div id="wc2"></div></p>
+<p align="center" style="color:#aaa"><strong>negative word cloud</strong></p>
 
 
 <p>We perform the following steps to get the cleaned data:<br>Lowercase, delete all the stop words and punctuation and all reviews in other language.<br>Take all the reviews with scores 5 and 1, find the top 500 words that are most frequently shown in the reviews, named as wordlist1 (top 500 words in 1-star review) and wordlist5 (top 500 words in 5-star review)<br>Compare the two lists, delete any words that exist in both list<br>The words left in the wordlist5 are the positive words and the words left in wordlist1 are the negative words.</p>
@@ -279,12 +283,21 @@ Environment: Score from 1 to 5
 <p>First, we noticed that there is an attribute in the dataset called [review_count] and we counted number of all the reviews and average them to get a average review_count in the dataset to be 31.6. Then, what we do is to ingore all the data with a review_count less than the average number we just get. We took this step as small review_count will definitely cause a big bias on the rating as well as the star of the restaurant. Then, regarding to a restaurant, price_range is also extremely important. However, not all data in our dataset have a price_range attribute. Thus, what we mainly do is to just pick the data with the price_range tag to do the learning. In addition, the current status of the restaurant will also affect the star of the restaurant badly in common sense. In all, with all the parameters above plus [city, state] pair. We generated our training features.</p>
 <p>Next, we need to move to the training label part. For training labels, we count the average star of all restaurants that have above average reviews and price range tag, again, in order to avoid bias of the data. Then, we give label 1 to stars more or equal to average star and 0 to stars less than averae star. In this way, we obtained all training labels and we start doing machine learining.</p>
 <p>We used nb, log, svm models to model the data and did the 10-folder cross validation. The result turned out to be in the interval of [0.55, 0.60] and when print 10 most and 10 least informative features, the results all turned out to be city name. </p>
+<img src="/images/ml_result.png" title="machine learning result">
 <p>Analysis: If our accuracy of the 10-folder is high and the most/least informative features are all cities, we can conclude that the city where the restaurant locationed in really matters. However, in our case, the accuray is not high, thus, we cannot draw the conclusion that the city matters. On the other side, our accuracy is not always oscillation below and above 0.5, which means the feature set can actually give us some cule about the star of the restaurant. This is awesome as we can further explore the dataset to obtain a better result. Maybe we can combaine this machine learning method with other methods later to realize our final goal.</p>
 <p>Conclusion: As for this machine learning method, we cannot rely on [city, state, price_range, current_state] to predict the star of the restaurant very correctly.</p>
+<p><a href="https://www.dropbox.com/s/lc6e57ulzlukjox/midml.zip?dl=0" target="_blank" rel="external">Download code for machine learning</a></p>
+<h1 id="Further-Discussion"><a href="#Further-Discussion" class="headerlink" title="Further Discussion"></a>Further Discussion</h1><p>There are two main difficulties we are facing with this project: </p>
+<ol>
+<li><p>The review set alone amounts to around 2GB of data. It takes a long time to do machine learning and test our hypothesis each time.</p>
+</li>
+<li><p>There are lots of feature generation methods as well as machine learning models. So far we have used word frequency counting, and experimented with the three classifiers from the machine learning lab: naive Bayes, logistic regression and support vector machine. But we are still trying to gain a deeper insight of the review data, and working on to combine it with the business and user data set.</p>
+</li>
+</ol>
+<p>To solve these problems, we are hoping to learn more about MapReduce and AWS from the next lab, which will help us build a more effective way to process the data. We have also conducted preliminary literature search, and are planning to study latent factor recommender system.  If we have more time we will also read the paper Hidden factors and hidden topics: understanding rating dimensions with review text by J. McAuley and J. Leskovec, and try to apply the method in the paper to improve our model.</p>
+<p>Overall, after our initial exploration of the data, we believe this is a deep dataset and contains lots of interesting hidden information. And we think we are on track with the project.</p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> <!-- JQUERY -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<!-- <script src="/javascript/d3.layout.cloud.js"></script> -->
-<!-- <script src="/javascript/test.js"</script> -->
 
 <script>
 // Word cloud layout by Jason Davies, http://www.jasondavies.com/word-cloud/
@@ -674,76 +687,9 @@ function cloud(d3) {
 }
 
 })();
-
-$(document).ready(function() {
-    var width = 600,
-        height = 480;
-
-    var fill = d3.scale.category20();
-
-    var tooltip = d3.select('body').append('div')
-            .attr('class', 'tooltip')
-            .style('position', 'absolute')
-            .style('padding', '5px 5px')
-            .style('background', 'white')
-            .style('opacity', 0);
-
-    d3.csv('/data/positive_words.csv')
-        .row(function(d) {
-            return { key: d.word, value: +d.count };
-        })
-        .get(function(error, rows) {
-            words = rows.map(function(d) {
-                return {text: d.key, size: d.value};
-            });
-
-            var scale = d3.scale.linear()
-                    .domain([d3.min(rows, function(d) { return d.value; }),
-                             d3.max(rows, function(d) { return d.value; })])
-                    .range([10, 100]);
-
-            d3.layout.cloud().size([width, height])
-                .words(words)
-                .rotate(function() { return ~~(Math.random() * 2) * 90; })
-                .font("Impact")
-                .fontSize(function(d) { return scale(d.size); })
-                .on("end", draw)
-                .start();
-
-            function draw(words) {
-                d3.select("#wc").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", "translate(" + width / 2 + ", " + height / 2 + ")")
-                    .selectAll("text")
-                    .data(words)
-                    .enter().append("text")
-                    .style("font-size", function(d) { return d.size + "px"; })
-                    .style("font-family", "Impact")
-                    .style("fill", function(d, i) { return fill(i); })
-                    .attr("text-anchor", "middle")
-                    .attr("transform", function(d) {
-                        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                    })
-                    .text(function(d) { return d.text; })
-                    .on('mouseover', function(d, i) {
-                        d3.select(this).style('opacity', 0.7);
-                        tooltip.transition().style('opacity', 0.8);
-                        tooltip.html(i+1)
-                            .style('left', (d3.event.pageX) + 'px')
-                            .style('top', (d3.event.pageY) + 'px');
-                    })
-                    .on('mouseout', function(d) {
-                        d3.select(this).style('opacity', 1.0);
-                        tooltip.transition().style('opacity', 0);
-                    })
-                ;
-            }
-        });
-});
 </script>
 
+<script src="/javascript/wc.js"></script>
 
           
         
