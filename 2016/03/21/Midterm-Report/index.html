@@ -67,7 +67,7 @@
 <meta property="og:image" content="http://yoursite.com/images/barchart1.png">
 <meta property="og:image" content="http://yoursite.com/images/barchart2.png">
 <meta property="og:image" content="http://yoursite.com/images/ml_result.png">
-<meta property="og:updated_time" content="2016-03-23T01:18:31.000Z">
+<meta property="og:updated_time" content="2016-03-27T15:04:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Midterm Report">
 <meta name="twitter:description" content="IntroductionThe dataset we are using is from Yelp Dataset Challenge. There are six subsets in total: business, review, user, check-in, tip and photos.  And all the data are in json format.  We have be">
@@ -239,11 +239,11 @@
 
       
         <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The dataset we are using is from <a href="https://www.yelp.com/dataset_challenge/" target="_blank" rel="external">Yelp Dataset Challenge</a>. There are six subsets in total: business, review, user, check-in, tip and photos.  And all the data are in json format.  We have been using the business, review and user datasets, which contains 77,445 businesses, 2,225,213 reviews and 552,339 user profiles.  More specifically, we use the following data from these three sets:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">'business'</span>:</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'business_id'</span>: (encrypted business id),</span><br><span class="line">        <span class="string">'state'</span>: (state),</span><br><span class="line">        <span class="string">'stars'</span>: (star rating, rounded to half-stars),</span><br><span class="line">        <span class="string">'review_count'</span>: (review count)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="string">'review'</span>: </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'user_id'</span>: (encrypted user id),</span><br><span class="line">        <span class="string">'business_id'</span>: (encrypted business id),</span><br><span class="line">        <span class="string">'stars'</span>: (star rating, rounded to half-stars),</span><br><span class="line">        <span class="string">'text'</span>: (review text)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="string">'user'</span>: </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'user_id'</span>: (encrypted user id),</span><br><span class="line">        <span class="string">'review_count'</span>: (review count),</span><br><span class="line">        <span class="string">'average_stars'</span>: (floating point average, like <span class="number">4.31</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">'business'</span>:</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'business_id'</span>: (encrypted business id),</span><br><span class="line">        <span class="string">'state'</span>: (state),</span><br><span class="line">        <span class="string">'stars'</span>: (star rating, rounded to half-stars),</span><br><span class="line">        <span class="string">'review_count'</span>: (review count)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="string">'review'</span>:</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'user_id'</span>: (encrypted user id),</span><br><span class="line">        <span class="string">'business_id'</span>: (encrypted business id),</span><br><span class="line">        <span class="string">'stars'</span>: (star rating, rounded to half-stars),</span><br><span class="line">        <span class="string">'text'</span>: (review text)</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="string">'user'</span>:</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">'user_id'</span>: (encrypted user id),</span><br><span class="line">        <span class="string">'review_count'</span>: (review count),</span><br><span class="line">        <span class="string">'average_stars'</span>: (floating point average, like <span class="number">4.31</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Based on these data, we want to achieve the following two goals:</p>
 <ol>
 <li><p>Given a user’s review text, predict its star rating automatically. Our idea of approaching this goal is to create a sentiment file specifically for Yelp to predict review stars (1-5)</p>
-<p> (a) This sentiment file should perform better at predicting review stars based on the review text comparing to the sentiment file we use during the ml lab. </p>
+<p> (a) This sentiment file should perform better at predicting review stars based on the review text comparing to the sentiment file we use during the ml lab.</p>
 <p> (b) We may take into account that some users may tend to give overall higher stars. So if have time, we will take into the reviewer’s average stars into account and predict the review stars based on both the text and the user.</p>
 </li>
 <li><p>Study the different factors that affect the overall ratings of restaurants and create a report for each restaurant, giving them scores on their performance based on the review for each restaurant. The report will look like below:</p>
@@ -280,15 +280,15 @@
 </ol>
 <p>Based on the two word clouds above, our hypothesis on the positive words are supported: most of the “positive words” we find, especially the top 50 words, have a positive meaning with it, such as “awesome”, “fresh”, “excellent”, “favorite”, happy”, etc. However, our hypothesis of the negative words are not strongly supported: many of the “negative words” we find don’t have any negative meaning behind it.</p>
 <p>A natural follow-up is to look at the most-frequent two-word and three-word phrases.</p>
-<h1 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h1><p>For the machine learning part of our project, this time, we want to find the relationship between the restaurant’s actual star and the [city, state, price range, current_state] set. In order to make our result more reliable, we need to do some operations to the data we have. </p>
+<h1 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h1><p>For the machine learning part of our project, this time, we want to find the relationship between the restaurant’s actual star and the [city, state, price range, current_state] set. In order to make our result more reliable, we need to do some operations to the data we have.</p>
 <p>First, we noticed that there is an attribute in the dataset called [review_count] and we counted number of all the reviews and average them to get a average review_count in the dataset to be 31.6. Then, what we do is to ingore all the data with a review_count less than the average number we just get. We took this step as small review_count will definitely cause a big bias on the rating as well as the star of the restaurant. Then, regarding to a restaurant, price_range is also extremely important. However, not all data in our dataset have a price_range attribute. Thus, what we mainly do is to just pick the data with the price_range tag to do the learning. In addition, the current status of the restaurant will also affect the star of the restaurant badly in common sense. In all, with all the parameters above plus [city, state] pair. We generated our training features.</p>
 <p>Next, we need to move to the training label part. For training labels, we count the average star of all restaurants that have above average reviews and price range tag, again, in order to avoid bias of the data. Then, we give label 1 to stars more or equal to average star and 0 to stars less than averae star. In this way, we obtained all training labels and we start doing machine learining.</p>
-<p>We used nb, log, svm models to model the data and did the 10-folder cross validation. The result turned out to be in the interval of [0.55, 0.60] and when print 10 most and 10 least informative features, the results all turned out to be city name. </p>
+<p>We used nb, log, svm models to model the data and did the 10-folder cross validation. The result turned out to be in the interval of [0.55, 0.60] and when print 10 most and 10 least informative features, the results all turned out to be city name.</p>
 <img src="/images/ml_result.png" title="machine learning result">
 <p>Analysis: If our accuracy of the 10-folder is high and the most/least informative features are all cities, we can conclude that the city where the restaurant locationed in really matters. However, in our case, the accuray is not high, thus, we cannot draw the conclusion that the city matters. On the other side, our accuracy is not always oscillation below and above 0.5, which means the feature set can actually give us some clue about the star of the restaurant. This is awesome as we can further explore the dataset to obtain a better result. Maybe we can combaine this machine learning method with other methods later to realize our final goal.</p>
 <p>Conclusion: As for this machine learning method, we cannot rely on [city, state, price_range, current_state] to predict the star of the restaurant very correctly.</p>
 <p><a href="https://www.dropbox.com/s/lc6e57ulzlukjox/midml.zip?dl=0" target="_blank" rel="external">Download code for machine learning</a></p>
-<h1 id="Further-Discussion"><a href="#Further-Discussion" class="headerlink" title="Further Discussion"></a>Further Discussion</h1><p>There are two main difficulties we are facing with this project: </p>
+<h1 id="Further-Discussion"><a href="#Further-Discussion" class="headerlink" title="Further Discussion"></a>Further Discussion</h1><p>There are two main difficulties we are facing with this project:</p>
 <ol>
 <li><p>The review set alone amounts to around 2GB of data. It takes a long time to do machine learning and test our hypothesis each time.</p>
 </li>
@@ -705,6 +705,20 @@ function cloud(d3) {
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/19/post1/" rel="prev" title="Blog Post 1">
+                Blog Post 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
       
@@ -768,7 +782,7 @@ function cloud(d3) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
