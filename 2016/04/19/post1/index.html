@@ -66,7 +66,7 @@
 <meta property="og:image" content="http://yoursite.com/images/map.post1.png">
 <meta property="og:image" content="http://yoursite.com/images/1.post1.png">
 <meta property="og:image" content="http://yoursite.com/images/2.post1.png">
-<meta property="og:updated_time" content="2016-04-19T17:32:54.000Z">
+<meta property="og:updated_time" content="2016-04-19T17:33:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Blog Post 1">
 <meta name="twitter:description" content="This week, our group paid more attention to the dataset itself as we want to explore more interesting facts that hide in our dataset. The steps taken this week will help us better understand our datas">
@@ -247,7 +247,7 @@
 <p>The last step is to divide the third list by the second list by index, in this step, we got the average star of business in each state as the following [3.701, 3.589, 3.568, 3.66, 3.552, 3.71, 3.683, 3.71, 3.583, 3.809, 3.84, 3.781].</p>
 <p>Take a look at the list of average stars, average star of all states is 3.682. As our data is samples, we need to use the sample formula to calculate the variance which is 0.00924 at last. From these analysis, we can see that the average star do not vary too much, they are all in the interval [3.552, 3.84], the maximum difference is less than 0.3.</p>
 <p>Then, with only nums, it not easy for us to get a overall understanding how the average stars vary from state to state according to location. Thus, we make the following visualization to help us. When creating the visualiztion, we find another problem that ‘EDH’, ‘MLN’, ‘BW’, ‘ON’, ‘QC’ do not exist as US states. As a result, these parts of data are ignored. The created visualization is shown in the following graph.</p>
-<img src="/images/map.post1.png" title="Average rating in each state.">
+<img src="/images/map.post1.png" title="Average rating in each state">
 <p>In the visualization, the darker the color is, the higher the average star is. There are states with high average star on both east and west part, which reveals the data is not too bias to be used as a valid dataset. However, as we found out that there are only 7 valid states with enough data, in the next steps, we may want to use the Yelp Api to get more data about other states.</p>
 <p>When further exploring our dataset, we found that in check-in json file we have check-in info for 24 hours a day in the whole week. Then, we come up with the idea that we can use these data to find the check-in pattern with respect of day in week and different hours within a day. After we clean the data, we get the following 7 lists(day in week), each list contain 24 nums(hours).</p>
 <ul>
@@ -261,7 +261,7 @@
 </ul>
 <p>It’s not a good way to find the pattern with only several lists of numbers. Thus, we created two visualizations.</p>
 <p>The first visualization is number of check-in with respect of day in a week.</p>
-<img src="/images/1.post1.png" title="Check-in count for each day in a week.">
+<img src="/images/1.post1.png" title="Check-in count for each day in a week">
 <p>From the visualization we can see that people tend to go to restaurant in later part of the week. We can see the peak in Friday, which makes sense to all of us as that’s what we do on Friday. However, what we do not expected at first is the number of check-in on Thursday. It is even bigger than the number in Saturday.</p>
 <p>The second visualization is the number of check-in with respect of different hours in a day. In this graph, we expect to have two peaks in about 12:00 am and 6:00 pm as they are typical time of eating. In this visualization, we chose to use line graph to better reveal the change pattern of numbers.</p>
 <img src="/images/2.post1.png" title="Check-in count for time in a day">
