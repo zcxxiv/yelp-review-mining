@@ -57,20 +57,22 @@
 
 
 
-<meta name="description" content="This week, our group paid more attention to the dataset itself as we want to explore more interesting facts that hide in our dataset. The steps taken this week will help us better understand our datas">
+<meta name="description" content="In this week, we’ve conducted basic sentiment analysis and a topic modeling to the review texts.
+Sentiment AnalysisAs one of the goals of our project is to provide special words related to reviews on">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blog Post 1">
-<meta property="og:url" content="http://yoursite.com/2016/04/19/post1/index.html">
+<meta property="og:title" content="Blog Post 2">
+<meta property="og:url" content="http://yoursite.com/2016/04/26/post2/index.html">
 <meta property="og:site_name" content="Yelp Review Mining">
-<meta property="og:description" content="This week, our group paid more attention to the dataset itself as we want to explore more interesting facts that hide in our dataset. The steps taken this week will help us better understand our datas">
-<meta property="og:image" content="http://yoursite.com/images/map.post1.png">
-<meta property="og:image" content="http://yoursite.com/images/1.post1.png">
-<meta property="og:image" content="http://yoursite.com/images/2.post1.png">
-<meta property="og:updated_time" content="2016-04-19T21:07:51.000Z">
+<meta property="og:description" content="In this week, we’ve conducted basic sentiment analysis and a topic modeling to the review texts.
+Sentiment AnalysisAs one of the goals of our project is to provide special words related to reviews on">
+<meta property="og:image" content="http://yoursite.com/images/02.ml_result.png">
+<meta property="og:image" content="http://yoursite.com/images/lda_result.png">
+<meta property="og:updated_time" content="2016-04-26T19:14:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog Post 1">
-<meta name="twitter:description" content="This week, our group paid more attention to the dataset itself as we want to explore more interesting facts that hide in our dataset. The steps taken this week will help us better understand our datas">
-<meta name="twitter:image" content="http://yoursite.com/images/map.post1.png">
+<meta name="twitter:title" content="Blog Post 2">
+<meta name="twitter:description" content="In this week, we’ve conducted basic sentiment analysis and a topic modeling to the review texts.
+Sentiment AnalysisAs one of the goals of our project is to provide special words related to reviews on">
+<meta name="twitter:image" content="http://yoursite.com/images/02.ml_result.png">
 
 
 
@@ -88,7 +90,7 @@
   };
 </script>
 
-  <title> Blog Post 1 | Yelp Review Mining </title>
+  <title> Blog Post 2 | Yelp Review Mining </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -198,7 +200,7 @@
             
             
               
-                Blog Post 1
+                Blog Post 2
               
             
           </h1>
@@ -210,8 +212,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-04-19T00:00:00-04:00" content="2016-04-19">
-              2016-04-19
+            <time itemprop="dateCreated" datetime="2016-04-26T00:00:00-04:00" content="2016-04-26">
+              2016-04-26
             </time>
           </span>
 
@@ -237,36 +239,29 @@
       
 
       
-        <p>This week, our group paid more attention to the dataset itself as we want to explore more interesting facts that hide in our dataset. The steps taken this week will help us better understand our dataset.</p>
-<h1 id="Location-and-Stars"><a href="#Location-and-Stars" class="headerlink" title="Location and Stars"></a>Location and Stars</h1><p>The first thing we noticed is that in the business json file, we have stars and state field of each business. With these information, we all want to see if the star have some special distribution all over the country. As we are doing the cleaning steps, we found our that yelp dataset do not cover all the states in US. We can only find data regarding to the following states [‘PA’, ‘NC’, ‘SC’, ‘WI’, ‘IL’, ‘AZ’, ‘NV’, ‘NM’, ‘AR’, ‘QC’, ‘ON’, ‘TX’, ‘EDH’, ‘MLN’, ‘ELN’, ‘HAM’, ‘SCB’, ‘FIF’, ‘NTH’, ‘BW’, ‘RP’, ‘CA’, ‘KHL’, ‘MN’, ‘MA’, ‘NW’, ‘OR’, ‘AL’]. However, as these stats do not only gather in a certain place which will have huge probability of causing bias, it is all right. Then, we count the number of business regarding to the states, which gives us the following result, [3754, 6162, 271, 2802, 737, 32614, 21233, 1, 1, 4942, 474, 2, 3206, 147, 12, 1, 3, 5, 1, 1048, 18, 3, 1, 1, 1, 1, 1, 1]. As we all know that small numbers can cause bias, what we did is that we ignored all the states that have business data less than 20. In the meaning time, we also keep track of the sum of stars of these business. Thus, finally, we got three lists.</p>
-<ul>
-<li>All states, [‘PA’, ‘NC’, ‘SC’, ‘WI’, ‘IL’, ‘AZ’, ‘NV’, ‘QC’, ‘ON’, ‘EDH’, ‘MLN’, ‘BW’]</li>
-<li>Number of business within each state, [3754, 6162, 271, 2802, 737, 32614, 21233, 4942, 474, 3206, 147, 1048]</li>
-<li>Total stars of business within each state, [13892.5, 22113.5, 967.0, 10254.0, 2617.5, 121008.5, 78200.0, 18335.0, 1698.5, 12210.5, 564.5, 3963.0].</li>
-</ul>
-<p>The last step is to divide the third list by the second list by index, in this step, we got the average star of business in each state as the following [3.701, 3.589, 3.568, 3.66, 3.552, 3.71, 3.683, 3.71, 3.583, 3.809, 3.84, 3.781].</p>
-<p>Take a look at the list of average stars, average star of all states is 3.682. As our data is samples, we need to use the sample formula to calculate the variance which is 0.00924 at last. From these analysis, we can see that the average star do not vary too much, they are all in the interval [3.552, 3.84], the maximum difference is less than 0.3.</p>
-<p>Then, with only nums, it not easy for us to get a overall understanding how the average stars vary from state to state according to location. Thus, we make the following visualization to help us. When creating the visualiztion, we find another problem that ‘EDH’, ‘MLN’, ‘BW’, ‘ON’, ‘QC’ do not exist as US states. As a result, these parts of data are ignored. The created visualization is shown in the following graph.</p>
-<img src="/images/map.post1.png" title="Average rating in each state">
-<p>In the visualization, the darker the color is, the higher the average star is. There are states with high average star on both east and west part, which reveals the data is not too bias to be used as a valid dataset. However, as we found out that there are only 7 valid states with enough data, in the next steps, we may want to use the Yelp Api to get more data about other states.</p>
-<h1 id="Check-in-Time-Distribution"><a href="#Check-in-Time-Distribution" class="headerlink" title="Check-in Time Distribution"></a>Check-in Time Distribution</h1><p>When further exploring our dataset, we found that in check-in json file we have check-in info for 24 hours a day in the whole week. Then, we come up with the idea that we can use these data to find the check-in pattern with respect of day in week and different hours within a day. After we clean the data, we get the following 7 lists(day in week), each list contain 24 nums(hours).</p>
-<ul>
-<li>Sunday = [11672, 6793, 4656, 4659, 6340, 11031, 15479, 23794, 31345, 40109, 49002, 71565, 82624, 66888, 58790, 59172, 67284, 81184, 84958, 71604, 51379, 34099, 20309, 13113]</li>
-<li>Monday = [9140, 5352, 3533, 3696, 6419, 11185, 16004, 24685, 31388, 38678, 46984, 69591, 79355, 60188, 53369, 56892, 68874, 85823, 91069, 78152, 55278, 35855, 21177, 13397]</li>
-<li>Tuesday = [9266, 5474, 3566, 3744, 6262, 11226, 15705, 24949, 31958, 39805, 47032, 70598, 81182, 62740, 55020, 58579, 69970, 88317, 94968, 82354, 58099, 37617, 18451, 14153]</li>
-<li>Wednesday = [10466, 6085, 4208, 3700, 6420, 11089, 16079, 25211, 32443, 40629, 48605, 72010, 83665, 64185, 56654, 60532, 72568, 91697, 99198, 87207, 63637, 43412, 27694, 19062]</li>
-<li>Thursday = [13549, 8360, 5493, 4736, 6989, 11703, 17660, 28236, 37778, 47623, 57972, 85624, 101500, 81173, 73052, 77023, 91814, 115822, 130199, 122775, 96646, 72325, 51606, 37224]</li>
-<li>Friday = [26648, 17131, 10907, 8376, 7128, 9412, 16475, 30624, 51195, 72734, 93083, 116725, 129476, 124565, 111156, 104013, 103802, 113501, 122653, 115377, 95207, 73408, 53660, 39508]</li>
-<li>Saturday = [28314, 17893, 10785, 7958, 6457, 7824, 12423, 23639, 41881, 64080, 85120, 106712, 118690, 111135, 95316, 84946, 81315, 84199, 83877, 71611, 53112, 36528, 23570, 16188]</li>
-</ul>
-<p>It’s not a good way to find the pattern with only several lists of numbers. Thus, we created two visualizations.</p>
-<p>The first visualization is number of check-in with respect of day in a week.</p>
-<img src="/images/1.post1.png" title="Check-in count for each day in a week">
-<p>From the visualization we can see that people tend to go to restaurant in later part of the week. We can see the peak in Friday, which makes sense to all of us as that’s what we do on Friday. However, what we do not expected at first is the number of check-in on Thursday. It is even bigger than the number in Saturday.</p>
-<p>The second visualization is the number of check-in with respect of different hours in a day. In this graph, we expect to have two peaks in about 12:00 am and 6:00 pm as they are typical time of eating. In this visualization, we chose to use line graph to better reveal the change pattern of numbers.</p>
-<img src="/images/2.post1.png" title="Check-in count for time in a day">
-<p>From the graph we can easily see the two peaks in 12:00-13:00, 18:00-19:00 which also fits our expectation. If we ignore the two peaks for a second, the graph is somewhat like a normal distribution in its two tails, which means most of the check-in happens in the middle part of the day, from 9:00 to 21:00.</p>
-<h1 id="Next-Step"><a href="#Next-Step" class="headerlink" title="Next Step"></a>Next Step</h1><p>As we have deeply explored the data, the next thing we want to do is to study the review dataset, and predict the star for reviews and businesses with the text reviews provided using the bag-of-words model and other natural language processing algorithms such as LDA (latent Dirichlet allocation) and Word2Vec.</p>
+        <p>In this week, we’ve conducted basic sentiment analysis and a topic modeling to the review texts.</p>
+<h1 id="Sentiment-Analysis"><a href="#Sentiment-Analysis" class="headerlink" title="Sentiment Analysis"></a>Sentiment Analysis</h1><p>As one of the goals of our project is to provide special words related to reviews on Yelp along with their sentiments to Yelp Company in order to help yelp better understand their reviews, this week, the first thing we mainly focused on is that we ran machine learning on the reviews and related starts in order to get the sentiment for each of the words. The initial step do this is to count what words occurs the most in all the reviews we have. Then, we got a list of word occurrence times for each positive reviews and negative reviews. As some of the words will appear in both positive and negative reviews, we deleted them. After that, the length of both positive and negative lists are around 160 (all words occurrences times is bigger than 5000). These are words that we want to assign sentiments and give to yelp. However, as we manually went over these lists, some words seems to mean nothing in the aspect of positive or negative, for example, there are words like potato and boyfriend in the positive word list, there are words like email and face in the negative word list. However, as all word counts are above 5000, these words should really something even though they mean nothing to us in the aspect of positive or negative. Thus, our plan is to do the machine learning twice. One with the word lists we have already, another one with the word list that we manually went over with all “non-sense” words deleted.</p>
+<p>When doing the machine learning, we found that not all reviews are in a decent format. Some seems to be in a mess which made it hard for us to extract key words from them. Then, what we did is that 1. lowercase all reviews. 2. replace string punctuation with a space. 3. split them and store. After we have each review elements in a good format, we created a list with both positive words and negative words we have. The next step is that for each review, we will create a new string, if one element of the review is in the positive/negative list, the new string will add this word in the corresponding place, otherwise, the string will add “empty” in the corresponding place. Then, using vectorizer.fit_transfrom, we have get our training features. The training labels of the model is composed of the stars related to each review for 1-5, 5 kinds of labels. For the first step, we use the naive Bayes model to train the model. For now, we think it will be kind of hard to exactly predict the label, we will tolerant predict will +-1 error. Maybe our tolerance condition now is too widely open, we will adjust the method in the next two weeks to get a better result. The following are the results we have now. One is for the whole word list, one is for the revised word list which mentioned above.</p>
+<img src="/images/02.ml_result.png" title="Machine Learning Result">
+<p>In the next week, the first thing we will do is to adjust our machine learning algorithm to get a better sentiment score. In addition, we also want to fit a least square model to our data, which will also give us a sentiment score for each word. Afterwards, we will decide which result seems to be better and accept it.</p>
+<h1 id="Topic-Modeling"><a href="#Topic-Modeling" class="headerlink" title="Topic Modeling"></a>Topic Modeling</h1><p>In terms of topic modeling part of the project, we have done the following:</p>
+<ol>
+<li>Studied some related algorithms.</li>
+<li>Studied related python library.</li>
+<li>Tested the algorithm on a subset of our data.</li>
+<li>Discussed the potential adjustments of the algorithm for our project.</li>
+</ol>
+<p>Among the papers which mentioned in the final proposal, we decided to  study and try Latent Dirichlet allocation(LDA) first. We now have a clear theoretical understanding of how LDA functions and its characteristics. In short, LDA is a clustering algorithm to discover latent topics from a training corpus. We intent to use it to generate a bunch topics and then manually classify these topics to give suggestion to the restaurant.</p>
+<p>We then played around with a popular python package for topic modeling called <a href="https://radimrehurek.com/gensim/" target="_blank" rel="external">gensim</a>. Using this library, we performed a test to see how well LDA works on our dataset.</p>
+<p>In the test, we used all the restaurant review texts from Arizona (roughly 5% of our entire dataset) as training set. In these review texts, we only kept the words that are nouns to reduce the noise in the outcome. We generated 20 topics with this test and got the result below. The algorithm worked as expected, some groups have clear topic. However, we found the topics generated are still not useful enough for our purpose. We are most interested in the reviewers’ opinion of the dining experience, but the majority of topics generated are about the dining event itself(breakfast, asian food, etc).</p>
+<img src="/images/lda_result.png" title="LDA Test Result">
+<p>We have realized that the best place to extract reviewers’ opinion, is from their rating. Therefore, we have discussed some of the possibilities to integrate rating into our basic LDA model:</p>
+<ol>
+<li>Add our sentiment result from machine learning into the LDA training dictionary.</li>
+<li>Perform LDA on different rating groups.</li>
+<li>Modify LDA algorithm to incorporate rating parameter.</li>
+</ol>
+<p>We’ll try these methods in the final weeks and hopefully get better result.</p>
 
       
     </div>
@@ -284,17 +279,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/21/Midterm-Report/" rel="next" title="Midterm Report">
-                <i class="fa fa-chevron-left"></i> Midterm Report
+              <a href="/2016/04/19/post1/" rel="next" title="Blog Post 1">
+                <i class="fa fa-chevron-left"></i> Blog Post 1
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/26/post2/" rel="prev" title="Blog Post 2">
-                Blog Post 2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -420,7 +411,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Location-and-Stars"><span class="nav-number">1.</span> <span class="nav-text">Location and Stars</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Check-in-Time-Distribution"><span class="nav-number">2.</span> <span class="nav-text">Check-in Time Distribution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Next-Step"><span class="nav-number">3.</span> <span class="nav-text">Next Step</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sentiment-Analysis"><span class="nav-number">1.</span> <span class="nav-text">Sentiment Analysis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Topic-Modeling"><span class="nav-number">2.</span> <span class="nav-text">Topic Modeling</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

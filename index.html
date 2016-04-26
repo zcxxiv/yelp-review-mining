@@ -196,6 +196,117 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/26/post2/" itemprop="url">
+                  Blog Post 2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-26T00:00:00-04:00" content="2016-04-26">
+              2016-04-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>In this week, we’ve conducted basic sentiment analysis and a topic modeling to the review texts.</p>
+<h1 id="Sentiment-Analysis"><a href="#Sentiment-Analysis" class="headerlink" title="Sentiment Analysis"></a>Sentiment Analysis</h1><p>As one of the goals of our project is to provide special words related to reviews on Yelp along with their sentiments to Yelp Company in order to help yelp better understand their reviews, this week, the first thing we mainly focused on is that we ran machine learning on the reviews and related starts in order to get the sentiment for each of the words. The initial step do this is to count what words occurs the most in all the reviews we have. Then, we got a list of word occurrence times for each positive reviews and negative reviews. As some of the words will appear in both positive and negative reviews, we deleted them. After that, the length of both positive and negative lists are around 160 (all words occurrences times is bigger than 5000). These are words that we want to assign sentiments and give to yelp. However, as we manually went over these lists, some words seems to mean nothing in the aspect of positive or negative, for example, there are words like potato and boyfriend in the positive word list, there are words like email and face in the negative word list. However, as all word counts are above 5000, these words should really something even though they mean nothing to us in the aspect of positive or negative. Thus, our plan is to do the machine learning twice. One with the word lists we have already, another one with the word list that we manually went over with all “non-sense” words deleted.</p>
+<p>When doing the machine learning, we found that not all reviews are in a decent format. Some seems to be in a mess which made it hard for us to extract key words from them. Then, what we did is that 1. lowercase all reviews. 2. replace string punctuation with a space. 3. split them and store. After we have each review elements in a good format, we created a list with both positive words and negative words we have. The next step is that for each review, we will create a new string, if one element of the review is in the positive/negative list, the new string will add this word in the corresponding place, otherwise, the string will add “empty” in the corresponding place. Then, using vectorizer.fit_transfrom, we have get our training features. The training labels of the model is composed of the stars related to each review for 1-5, 5 kinds of labels. For the first step, we use the naive Bayes model to train the model. For now, we think it will be kind of hard to exactly predict the label, we will tolerant predict will +-1 error. Maybe our tolerance condition now is too widely open, we will adjust the method in the next two weeks to get a better result. The following are the results we have now. One is for the whole word list, one is for the revised word list which mentioned above.</p>
+<img src="/images/02.ml_result.png" title="Machine Learning Result">
+<p>In the next week, the first thing we will do is to adjust our machine learning algorithm to get a better sentiment score. In addition, we also want to fit a least square model to our data, which will also give us a sentiment score for each word. Afterwards, we will decide which result seems to be better and accept it.</p>
+<h1 id="Topic-Modeling"><a href="#Topic-Modeling" class="headerlink" title="Topic Modeling"></a>Topic Modeling</h1><p>In terms of topic modeling part of the project, we have done the following:</p>
+<ol>
+<li>Studied some related algorithms.</li>
+<li>Studied related python library.</li>
+<li>Tested the algorithm on a subset of our data.</li>
+<li>Discussed the potential adjustments of the algorithm for our project.</li>
+</ol>
+<p>Among the papers which mentioned in the final proposal, we decided to  study and try Latent Dirichlet allocation(LDA) first. We now have a clear theoretical understanding of how LDA functions and its characteristics. In short, LDA is a clustering algorithm to discover latent topics from a training corpus. We intent to use it to generate a bunch topics and then manually classify these topics to give suggestion to the restaurant.</p>
+<p>We then played around with a popular python package for topic modeling called <a href="https://radimrehurek.com/gensim/" target="_blank" rel="external">gensim</a>. Using this library, we performed a test to see how well LDA works on our dataset.</p>
+<p>In the test, we used all the restaurant review texts from Arizona (roughly 5% of our entire dataset) as training set. In these review texts, we only kept the words that are nouns to reduce the noise in the outcome. We generated 20 topics with this test and got the result below. The algorithm worked as expected, some groups have clear topic. However, we found the topics generated are still not useful enough for our purpose. We are most interested in the reviewers’ opinion of the dining experience, but the majority of topics generated are about the dining event itself(breakfast, asian food, etc).</p>
+<img src="/images/lda_result.png" title="LDA Test Result">
+<p>We have realized that the best place to extract reviewers’ opinion, is from their rating. Therefore, we have discussed some of the possibilities to integrate rating into our basic LDA model:</p>
+<ol>
+<li>Add our sentiment result from machine learning into the LDA training dictionary.</li>
+<li>Perform LDA on different rating groups.</li>
+<li>Modify LDA algorithm to incorporate rating parameter.</li>
+</ol>
+<p>We’ll try these methods in the final weeks and hopefully get better result.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/19/post1/" itemprop="url">
                   Blog Post 1
                 </a>
@@ -875,7 +986,7 @@ function cloud(d3) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
