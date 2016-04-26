@@ -255,7 +255,7 @@
 <p>We then played around with a popular python package for topic modeling called <a href="https://radimrehurek.com/gensim/" target="_blank" rel="external">gensim</a>. Using this library, we performed a test to see how well LDA works on our dataset.</p>
 <p>In the test, we used all the restaurant review texts from Arizona (roughly 5% of our entire dataset) as training set. In these review texts, we only kept the words that are nouns to reduce the noise in the outcome. We generated 20 topics with this test and got the result below. The algorithm worked as expected, some groups have clear topic. However, we found the topics generated are still not useful enough for our purpose. We are most interested in the reviewers’ opinion of the dining experience, but the majority of topics generated are about the dining event itself(breakfast, asian food, etc).</p>
 <img src="/images/lda_result.png" title="LDA Test Result">
-<p>We have realized that the best place to extract reviewers’ opinion, is from their rating. Therefore, we have discussed some of the possibilities to integrate rating into our basic LDA model:</p>
+<p>We have realized that the best place to extract reviewers’ opinion, is their rating. Therefore, we have discussed some of the possibilities to integrate rating into our basic LDA model:</p>
 <ol>
 <li>Add our sentiment result from machine learning into the LDA training dictionary.</li>
 <li>Perform LDA on different rating groups.</li>
