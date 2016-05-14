@@ -1,0 +1,708 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/yelp.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="SummaryThe fast-growing population of consumers and the increasing amount of yelp users has led to a massive amount of customer reviews that are too numerous for a user or a restaurant owner to read t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Final Report">
+<meta property="og:url" content="http://yoursite.com/2016/05/13/final-report/index.html">
+<meta property="og:site_name" content="Yelp Review Mining">
+<meta property="og:description" content="SummaryThe fast-growing population of consumers and the increasing amount of yelp users has led to a massive amount of customer reviews that are too numerous for a user or a restaurant owner to read t">
+<meta property="og:image" content="http://yoursite.com/images/workflow1.png">
+<meta property="og:image" content="http://yoursite.com/images/workflow2.png">
+<meta property="og:updated_time" content="2016-05-13T23:51:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Final Report">
+<meta name="twitter:description" content="SummaryThe fast-growing population of consumers and the increasing amount of yelp users has led to a massive amount of customer reviews that are too numerous for a user or a restaurant owner to read t">
+<meta name="twitter:image" content="http://yoursite.com/images/workflow1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Final Report | Yelp Review Mining </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yelp Review Mining</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Final Report
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-13T00:00:00-04:00" content="2016-05-13">
+              2016-05-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>The fast-growing population of consumers and the increasing amount of yelp users has led to a massive amount of customer reviews that are too numerous for a user or a restaurant owner to read themselves. Our project is creating a system to automatically extract and summarize the reviews into 4 categories: Food, Service, Price and Other, and present the users’ attitude towards each category. With the help of our system, besides one restaurant’s overall performance, users could gain a better knowledge of the restaurant’s performance in each category without reading thousands of tedious reviews exhaustively. Our project can be divided into two parts: Sentence Labeling and Sentiment Analysis.</p>
+<p>For each sentence in a review, we categorize it into one of four pre-defined categories using our sentence labeling model based on a popular topic modeling algorithm called Latent Dirichlet Allocation. For each categorized sentence, we do sentiment analysis and generate a rating for it. Finally, we combine all the sentence ratings in the same categories to generate an average rating for every category.</p>
+<h1 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h1><p>Our data is obtained from the <a href="https://www.yelp.com/dataset_challenge" target="_blank" rel="external">Yelp Challenge</a>. The whole dataset is composed of 5 different datasets corresponding to Business, Review, User, Check-in and Tip. In our project, we mainly focus on the Review dataset which contains 2,225,213 user reviews. We also used Business dataset to select only restaurant reviews.</p>
+<h1 id="Hypothesis-Assumption"><a href="#Hypothesis-Assumption" class="headerlink" title="Hypothesis/Assumption"></a>Hypothesis/Assumption</h1><p>We first assume that sentence labeling and sentiment analysis are two independent tasks that we can do them separately. It is reasonable as the attitude behind a word will be similar in different topic contents. Based on this, while doing sentiment analysis, we further assume that the review star is a summary of the overall attitude of the review text so that for two reviews sharing the same star score, they should have the same level of positive/negative feeling regardless the users and the restaurants. It may not be completely true as some consumers tend to give higher scores while others don’t. But based on the huge review dataset we have, the consumer bias can be even out and will not affect our result.</p>
+<h1 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h1><img src="/images/workflow1.png" title="Main Workflow">
+<h2 id="Sentence-Labeling"><a href="#Sentence-Labeling" class="headerlink" title="Sentence Labeling"></a>Sentence Labeling</h2><p>To improve accuracy and performance, we first run a simple test of existence of keywords to the sentence we are categorizing. For example, if a sentence includes the word “price”, we can confidently classify it to Price category without further analyzing.</p>
+<img src="/images/workflow2.png" title="LDA Workflow">
+<p>For the remaining sentences, we use Latent Dirichlet Allocation(LDA) to discover hidden unlabeled topics. Latent Dirichlet Allocation (LDA) is a generative statistical model which is widely used for discovering underlying topics from text documents. In LDA, each document may be viewed as a mixture of K topics. And each topic is collection of words with Dirichlet distribution. After many experiments, we decided to use a LDA model with 20 topics. For each vectorized sentence, the LDA model will output a list of pairs <code>(i, p)</code>, where <code>i</code> is a topic id, and <code>p</code> is the probability of the sentence belonging to topic <code>i</code>.</p>
+<p>Using the keywords in the topics generated by our LDA model, we then manually classify each topic into one or more of the following four groups: “Food”, “Price”, “Service”, “Other”. In specific, we examine all of the topics by plotting out their detailed information using <a href="https://github.com/bmabey/pyLDAvis" target="_blank" rel="external">pyLDAvis</a>, a python library for interactive topic model visualization. And we assign weights of each topic in these four groups. For example, after observing the most frequent words in the topic 7 shown in the visualization above, we might assign:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">weights[<span class="number">7</span>] = []   <span class="comment"># Food, Service, Price, Other</span></span><br></pre></td></tr></table></figure>
+<p>In the end, we take the dot product of probabilities returned by LDA and weights to generate a list of 4 category scores, and predict the sentence to be in the category that has the max category score.</p>
+<h2 id="Sentiment-Analysis"><a href="#Sentiment-Analysis" class="headerlink" title="Sentiment Analysis"></a>Sentiment Analysis</h2><p>Our initial approach for sentiment analysis is using keywords (most frequent non-stop words) sentiment score to predict review star. We go through all 1-star reviews and 5-star reviews and get words that occurs the most frequently in these reviews. We then delete the duplicates which occurs frequently both in the negative reviews and positive reviews. The words remained from the negative keywords and the positive keywords.Then, for each view, the training feature vector is generated based on the occurrence of the words that we obtained above, the training label is the star corresponding to the review. We use Naive Bayes, SVM and Logistic Regression to fit the training data and do the 5-fold cross validation to get the best model. When calculating accuracy, as we need to take the fact that different people have different rating standards into consideration, if the predicted star is in +1/-1 range of the actual star, we treat it as a true predict. In the end, we generate the sentiment score of those keywords based on the best model.</p>
+<p>In our second approach for sentiment analysis we focus on sentences rather than reviews. We split 100,000 1-star and 5-star reviews into sentences and then labeled them as negative and positive respectively. Instead of using bag of words model, we used Word2Vec model to better capture the word context and reduce memory usage. After vectorizing our data this way, we used a Artificial Neural Networks to do the classification. Our sentiment analysis model will classify a sentence to be negative or positive with a probability.</p>
+<p>For each categorized sentence, we combine its sentiment score and the score for the entire review provided by the reviewer to generate a scaled score for the sentence.</p>
+<h2 id="Combining-Results"><a href="#Combining-Results" class="headerlink" title="Combining Results"></a>Combining Results</h2><p>In the end, every sentence in every review will have both a category label and sentiment score. We sum up the sentence scores under each category to generate the average scores of Food, Service and Price for a restaurant.</p>
+<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p>Our first approach for sentiment analysis performs the best with Naive Bayes model with accuracy around 90% on test dataset (with +/- 1 star tolerate). Take into account that our base line of prediction accuracy is around 50%, the first approach does a great job of predicting the star for a review and also support our assumption that the star of people’s review is mainly based on the sentiment of the words in the review.</p>
+<p>However, the first approach does not perform so great when we want to use the model to predict the score of each sentence obtained from LDA algorithm. The accuracy goes down sharply because the information contained in a single sentence is much less than in a whole review and the keywords we analysis may not show up in the sentence.</p>
+<p>Our second approach for sentiment analysis does a better job for analyzing single sentence with the accuracy around 78%.</p>
+<p>For the Sentence Labeling, we are not able to come up with an efficient way to evaluate our model. We did perform manual test for about 100 sentences and got the accuracy of 80%. One thing we noticed during testing is that our model has higher accuracy when predicting a sentence to be Food and Price comparing to Service and Other.</p>
+<h1 id="Proposal-Goals"><a href="#Proposal-Goals" class="headerlink" title="Proposal Goals"></a>Proposal Goals</h1><p>According to our proposal, we have accomplished the 100% goal of our project.</p>
+<h1 id="Further-Discussion"><a href="#Further-Discussion" class="headerlink" title="Further Discussion"></a>Further Discussion</h1><p>The following are some thoughts to better improve our project.</p>
+<ol>
+<li><p>We fail to predict the exact score with high accuracy (without the +/- tolerance, we have 55% accuracy with 20% base line accuracy). Maybe we can take into account the user bias (the average score the user gives to all the reviews) as well to improve the accuracy.</p>
+</li>
+<li><p>If we can analysis word phrase, such as “not good”, “don’t like”, it can increase the sentiment analysis accuracy</p>
+</li>
+<li><p>We use gensim package for the LDA topic modeling, which does not support using seed words for initialization. Our current method of improving accuracy of the sentence labeling part is to filter and classify sentences with certain key words into their corresponding groups before using the LDA model to predict the categories. One possible improvement is to use a modified LDA model that allows initialization with seed words.</p>
+</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><p><a href="https://www.yelp.com/html/pdf/YelpDatasetChallengeWinner_ImprovingRestaurants.pdf" target="_blank" rel="external">“Improving Restaurants by Extracting Subtopics from Yelp Reviews.”</a> James Huang, Stephanie Rogers, Eunkwang Joo. University of California, Berkeley. <a href="https://www.conftool.com/iConference2014/index.php?page=browseSessions&amp;form_session=108" target="_blank" rel="external">Presented at iConference 2014 Berlin</a></p>
+</li>
+<li><p><a href="https://www.yelp.com/html/pdf/YelpDatasetChallengeWinner_HiddenFactors.pdf" target="_blank" rel="external">“Hidden Factors and Hidden Topics: Understanding Rating Dimensions with Review Text.”</a> Julian McAuley, Jure Leskovec. Stanford University.<br>Published in <a href="http://dl.acm.org/citation.cfm?id=2507163" target="_blank" rel="external">ACM RecSys ‘13 Proceedings</a></p>
+</li>
+<li><p><a href="https://districtdatalabs.silvrback.com/modern-methods-for-sentiment-analysis" target="_blank" rel="external">Modern Methods for Sentiment Analysis, Michael Czerny</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/03/post3/" rel="next" title="Blog Post 3">
+                <i class="fa fa-chevron-left"></i> Blog Post 3
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.png"
+               alt="CS1951a" />
+          <p class="site-author-name" itemprop="name">CS1951a</p>
+          <p class="site-description motion-element" itemprop="description">Final Project Blog</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Group Members</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.pusheen.com/" target="_blank">Chang Liu [cl137]</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.pusheen.com/" target="_blank">Hanwen Ren [hren]</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.pusheen.com/" target="_blank">Zheng Shi [zs9]</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.pusheen.com/" target="_blank">Ziyuan Chen [zchen24]</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">1.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data"><span class="nav-number">2.</span> <span class="nav-text">Data</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hypothesis-Assumption"><span class="nav-number">3.</span> <span class="nav-text">Hypothesis/Assumption</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methodology"><span class="nav-number">4.</span> <span class="nav-text">Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentence-Labeling"><span class="nav-number">4.1.</span> <span class="nav-text">Sentence Labeling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentiment-Analysis"><span class="nav-number">4.2.</span> <span class="nav-text">Sentiment Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Combining-Results"><span class="nav-number">4.3.</span> <span class="nav-text">Combining Results</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results"><span class="nav-number">5.</span> <span class="nav-text">Results</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Proposal-Goals"><span class="nav-number">6.</span> <span class="nav-text">Proposal Goals</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Further-Discussion"><span class="nav-number">7.</span> <span class="nav-text">Further Discussion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CS1951a</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+
+</body>
+</html>

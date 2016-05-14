@@ -1,0 +1,96 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    /*background-color: #EBEBEB;*/
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+}
+
+.header {
+    width: 100%;
+    height: 5vh;
+    margin: 0;
+    padding: 40px;
+    color: #C41200;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.left_container {
+    margin: 4vw;
+    margin-right: 2vw;
+    margin-top: 0;
+    padding: 20px;
+    width: 54%;
+    min-height: 50vh;
+    border: dotted 2px #C41200;
+
+}
+
+.right_container {
+    width: 29%;
+    min-height: 50vh;
+    max-height: 200vh;
+    margin-top: 0;
+    padding: 20px;
+    border: dotted 2px #C41200;
+}
+
+.review {
+    width: 95%;
+    padding: 10px;
+    margin: 15px auto;
+    border: dotted 1px grey;
+}
+
+.review_score {
+    width: 49%;
+    margin: 8px auto;
+    padding: 1px;
+    padding-left: 20px;
+    text-align: center;
+    border: dotted 1px grey;
+    border-radius: 0.2em;
+}
+
+h2 {
+    color: #C41200;
+}
+
+h3 {
+    color: #363636;
+    font-weight: 600;
+}
+
+.bar_chart div {
+  padding: 6px;
+  padding-left: 20px;
+  margin: 4px;
+  color: white;
+  text-align: left;
+}
+
+.food {
+    color: #25aa42;
+    font-weight: 400;
+}
+
+.service {
+    color: #325fc4;
+    font-weight: 400;
+}
+
+.price {
+    color: #C41200;
+    font-weight: 400;
+}
