@@ -261,6 +261,8 @@
 <p>For the Sentence Labeling, we are not able to come up with an efficient way to evaluate our model. We did perform manual test for about 100 sentences and got the accuracy of 80%. One thing we noticed during testing is that our model has higher accuracy when predicting a sentence to be Food and Price comparing to Service and Other.</p>
 <img src="/images/demo.png" title="Screenshot of final result demo">
 <h1 id="Proposal-Goals"><a href="#Proposal-Goals" class="headerlink" title="Proposal Goals"></a>Proposal Goals</h1><p>According to our proposal, we have accomplished the 100% goal of our project.</p>
+<p>We have successfully extract import words in reviews and assign them proper sentiment scores. The sentiment scores can be proved to be meaningful and reasonable according to our 90% accuracy(+1/-1 tolerance and baseline 50%) in test data. </p>
+<p>We successfully categorize the reviews into Food, Price, and Service and Other using our LDA model. And we further improve the accuracy of the sentence labeling part by filtering sentences with certain keywords and classifying them into their corresponding groups before applying the LDA model.</p>
 <h1 id="Further-Discussion"><a href="#Further-Discussion" class="headerlink" title="Further Discussion"></a>Further Discussion</h1><p>The following are some thoughts to better improve our project.</p>
 <p>We fail to predict the exact score with high accuracy (without the +/- tolerance, we have 55% accuracy with 20% base line accuracy). Maybe we can take into account the user bias (the average score the user gives to all the reviews) as well to improve the accuracy.</p>
 <p>If we can analysis word phrase, such as “not good”, “don’t like”, it can increase the sentiment analysis accuracy</p>
